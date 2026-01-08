@@ -2,7 +2,13 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['lexy.plus'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'lexy.plus',
+        pathname: '/**',
+      },
+    ],
     formats: ['image/avif', 'image/webp'],
   },
   compress: true,
