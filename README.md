@@ -1,12 +1,29 @@
 # LEXY - Tu Asistente Legal Inmobiliario con IA
 
-> De conversación a contrato firmado en 3 pasos. Inteligencia artificial legal especializada para agentes inmobiliarios.
+> De conversación a contrato firmado en 4 pasos. Inteligencia artificial legal especializada para agentes inmobiliarios.
 
 [![Next.js](https://img.shields.io/badge/Next.js-16.1-black)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-19.2-blue)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.1-38bdf8)](https://tailwindcss.com/)
+[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?logo=vercel)](https://vercel.com)
 [![License](https://img.shields.io/badge/license-ISC-green)](LICENSE)
+
+## 🌐 Live Demo
+
+**🚀 [Ver Demo en Vivo](https://lexyweb.vercel.app)** ← Click aquí para ver la landing page
+
+> **Nota:** El checkout de Stripe está desactivado hasta configurar las variables de entorno. La landing page funciona perfectamente.
+
+### 📊 Estado del Proyecto
+
+- ✅ **Landing page completa** - 6 secciones (Hero, Value Prop, How It Works, Pricing, FAQ, Footer)
+- ✅ **Diseño ultra-minimalista** - Inspiración Apple-style
+- ✅ **Imágenes reales del producto** - 5 screenshots integrados
+- ✅ **Deployed en Vercel** - Auto-deploy configurado con GitHub
+- ✅ **Responsive design** - Mobile-first con Tailwind CSS 4
+- ✅ **Animaciones fluidas** - Framer Motion
+- ⏳ **Stripe checkout** - Pendiente configuración de variables de entorno
 
 ---
 
@@ -117,32 +134,40 @@ npm run lint     # Ejecuta linter
 
 ## 🌍 Deploy a producción
 
-### Deploy en Vercel (Recomendado)
+### ✅ Proyecto ya deployed en Vercel
 
-1. **Instala Vercel CLI**
+**URL Live:** [https://lexyweb.vercel.app](https://lexyweb.vercel.app)
+
+**🔄 Deploy automático configurado:**
+- Cada `git push` a `main` despliega automáticamente
+- Build time: ~2 minutos
+- Zero downtime deployments
+
+### Configurar variables de entorno en Vercel (para Stripe)
+
+Cuando quieras activar los pagos con Stripe:
+
+1. Ve a [Vercel Dashboard](https://vercel.com/dashboard)
+2. Selecciona el proyecto `lexyweb`
+3. Settings → Environment Variables
+4. Añade estas 3 variables:
+   - `STRIPE_SECRET_KEY` - Tu clave secreta de Stripe
+   - `STRIPE_PRICE_ID_PRO` - Price ID del plan Pro
+   - `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` - Clave pública de Stripe
+5. Vercel hará redeploy automáticamente
+
+### Deploy manual (si es necesario)
+
 ```bash
+# Instalar Vercel CLI
 npm i -g vercel
-```
 
-2. **Inicia sesión**
-```bash
+# Login
 vercel login
+
+# Deploy
+vercel --prod
 ```
-
-3. **Deploy**
-```bash
-vercel
-```
-
-4. **Configura variables de entorno en Vercel**
-   - Ve a tu proyecto en Vercel Dashboard
-   - Settings → Environment Variables
-   - Añade tus claves de Stripe
-
-### Deploy automático con GitHub
-
-1. Conecta tu repositorio en [vercel.com/new](https://vercel.com/new)
-2. Cada `git push` desplegará automáticamente
 
 ---
 
@@ -191,9 +216,10 @@ Este proyecto está bajo la licencia ISC.
 
 ## 🔗 Links
 
-- **Landing Page**: [Próximamente]
-- **Aplicación**: [https://app.lexy.plus](https://app.lexy.plus)
-- **Documentación**: [En desarrollo]
+- **🌐 Landing Page**: [https://lexyweb.vercel.app](https://lexyweb.vercel.app) ✅ **LIVE**
+- **📱 Aplicación**: [https://app.lexy.plus](https://app.lexy.plus)
+- **📚 Documentación**: [En desarrollo]
+- **💻 Repositorio**: [https://github.com/axeforeverjumo/lexyweb](https://github.com/axeforeverjumo/lexyweb)
 
 ---
 
