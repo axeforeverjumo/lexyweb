@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import Button from '../Button';
+import Image from 'next/image';
 
 const steps = [
   {
@@ -11,18 +12,32 @@ const steps = [
     title: 'Pregunta a Lexy',
     description: '"Necesito un contrato de arrendamiento con opción de compra"',
     details: 'Lexy analiza tu necesidad y te hace las preguntas correctas. Modo conversacional, sin formularios complejos.',
+    image: '/images/chat-con-lexy.png',
+    alt: 'Chat conversacional con Lexy - Interfaz de consultas legales',
   },
   {
     number: '02',
     title: 'Genera tu contrato',
     description: 'En 30 segundos tienes un contrato de 10+ páginas.',
-    details: 'Personalizado con tus datos. Listo para firmar. Edita en tiempo real con el Canvas si necesitas cambios.',
+    details: 'Personalizado con tus datos. Listo para firmar. Cumple con toda la normativa legal vigente.',
+    image: '/images/generacion-del-contrato.png',
+    alt: 'Generación automática de contrato legal profesional',
   },
   {
     number: '03',
+    title: 'Edita en tiempo real con Lexy',
+    description: 'Modificaciones al instante con el Canvas visual',
+    details: 'Edita cláusulas, añade secciones o pide a Lexy cambios específicos. Todo en tiempo real sin salir del documento.',
+    image: '/images/canvas.png',
+    alt: 'Editor Canvas - Edición en tiempo real de contratos',
+  },
+  {
+    number: '04',
     title: 'Firma digital integrada',
     description: 'Envía por WhatsApp a tus clientes.',
-    details: 'Firmas desde móvil con PIN seguro. PDF certificado automático.',
+    details: 'Firmas desde móvil con PIN seguro. PDF certificado automático con validez legal.',
+    image: '/images/firma-digital.png',
+    alt: 'Sistema de firma digital integrado - Válido legalmente',
   },
 ];
 
@@ -40,7 +55,7 @@ export default function HowItWorks() {
           transition={{ duration: 0.6 }}
           className="text-4xl md:text-5xl font-bold text-center text-gray-900 mb-20"
         >
-          3 pasos. Desde la duda hasta
+          4 pasos. Desde la duda hasta
           <br />
           el contrato firmado.
         </motion.h2>
@@ -75,10 +90,16 @@ export default function HowItWorks() {
                 </div>
               </div>
 
-              {/* Image Placeholder */}
+              {/* Image */}
               <div className="flex-1 w-full">
-                <div className="bg-white rounded-xl shadow-lg h-64 flex items-center justify-center">
-                  <p className="text-gray-400">Screenshot paso {step.number}</p>
+                <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+                  <Image
+                    src={step.image}
+                    alt={step.alt}
+                    width={600}
+                    height={400}
+                    className="w-full h-auto"
+                  />
                 </div>
               </div>
             </motion.div>

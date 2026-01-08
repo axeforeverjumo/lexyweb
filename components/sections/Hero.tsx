@@ -2,6 +2,7 @@
 
 import Button from '../Button';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 export default function Hero() {
   return (
@@ -63,16 +64,21 @@ export default function Hero() {
           </p>
         </motion.div>
 
-        {/* Demo Visual Placeholder */}
+        {/* Demo Visual */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="mt-20 rounded-2xl bg-gradient-to-br from-gray-100 to-gray-200 h-96 flex items-center justify-center shadow-2xl"
+          className="mt-20 rounded-2xl overflow-hidden shadow-2xl"
         >
-          <p className="text-gray-400 text-lg">
-            [Canvas Demo Screenshot]
-          </p>
+          <Image
+            src="/images/dashboard.png"
+            alt="LEXY Dashboard - Interfaz de gestión de contratos"
+            width={1200}
+            height={600}
+            className="w-full h-auto"
+            priority
+          />
         </motion.div>
       </div>
     </section>
