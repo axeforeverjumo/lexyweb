@@ -3,6 +3,14 @@ import { stripe } from '@/lib/stripe';
 
 export async function POST(req: NextRequest) {
   try {
+    // Validate Stripe is configured
+    if (!process.env.STRIPE_SECRET_KEY || !process.env.STRIPE_PRICE_ID_PRO) {
+      return NextResponse.json(
+        { error: 'Stripe is not configured. Please contact support.' },
+        { status: 503 }
+      );
+    }
+
     const { priceId, successUrl, cancelUrl } = await req.json();
 
     // Create Stripe Checkout Session
