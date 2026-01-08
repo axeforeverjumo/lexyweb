@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import Button from '../Button';
+import { useCheckout } from '../useCheckout';
 
 const plans = [
   {
@@ -46,6 +47,7 @@ const plans = [
 export default function Pricing() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const { startCheckout, loading } = useCheckout();
 
   return (
     <section id="precios" ref={ref} className="py-32 px-6 bg-white">
@@ -122,9 +124,11 @@ export default function Pricing() {
                 <Button
                   variant={plan.ctaVariant}
                   className="w-full"
-                  href={plan.popular ? '/api/checkout' : '/signup'}
+                  onClick={plan.popular ? startCheckout : undefined}
+                  href={plan.popular ? undefined : '/signup'}
+                  disabled={plan.popular && loading}
                 >
-                  {plan.cta}
+                  {plan.popular && loading ? 'Procesando...' : plan.cta}
                 </Button>
                 {plan.ctaNote && (
                   <p className="text-xs text-center text-gray-500">
