@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { loadStripe } from '@stripe/stripe-js';
+import { loadStripe, Stripe } from '@stripe/stripe-js';
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
@@ -23,7 +23,13 @@ export function useCheckout() {
 
       // Redirect to Stripe Checkout
       const stripe = await stripePromise;
-      await stripe?.redirectToCheckout({ sessionId });
+      if (stripe) {
+        // @ts-ignore - redirectToCheckout exists in Stripe.js but TypeScript types may not reflect it
+        const { error } = await stripe.redirectToCheckout({ sessionId });
+        if (error) {
+          throw error;
+        }
+      }
     } catch (error) {
       console.error('Checkout error:', error);
       alert('Error al iniciar el pago. Por favor, inténtalo de nuevo.');
