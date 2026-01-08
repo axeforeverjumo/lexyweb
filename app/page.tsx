@@ -1,9 +1,14 @@
+import Navigation from '@/components/Navigation';
+
 export default function Home() {
   return (
-    <main className="min-h-screen flex items-center justify-center">
-      <h1 className="text-4xl font-bold text-center">
-        LEXY Landing Page
-      </h1>
-    </main>
+    <>
+      <Navigation />
+      <main className="min-h-screen pt-20">
+        <h1 className="text-4xl font-bold text-center py-20">
+          LEXY Landing Page
+        </h1>
+      </main>
+    </>
   );
 }
