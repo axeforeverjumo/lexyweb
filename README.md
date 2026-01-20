@@ -6,6 +6,7 @@
 [![React](https://img.shields.io/badge/React-19.2-blue)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.1-38bdf8)](https://tailwindcss.com/)
+[![Sanity CMS](https://img.shields.io/badge/Sanity-CMS-f03e2f)](https://www.sanity.io/)
 [![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?logo=vercel)](https://vercel.com)
 [![License](https://img.shields.io/badge/license-ISC-green)](LICENSE)
 
@@ -17,8 +18,10 @@
 
 ### 📊 Estado del Proyecto
 
-- ✅ **Landing page completa** - 6 secciones (Hero, Value Prop, How It Works, Pricing, FAQ, Footer)
-- ✅ **Diseño ultra-minimalista** - Inspiración Apple-style
+- ✅ **Landing page principal** - Diseño Apple-style minimalista
+- ✅ **Landing /urgente** - Foco en conversión inmediata (30 segundos)
+- ✅ **Blog con Sanity CMS** - Sistema completo sin código
+- ✅ **Diseño ultra-minimalista** - Apple-style con emerald accents
 - ✅ **Imágenes reales del producto** - 5 screenshots integrados
 - ✅ **Deployed en Vercel** - Auto-deploy configurado con GitHub
 - ✅ **Responsive design** - Mobile-first con Tailwind CSS 4
@@ -39,6 +42,7 @@ LEXY es una plataforma SaaS que combina IA conversacional con generación autom�
 - 📄 **Generación de contratos en 30 segundos** - 97 plantillas profesionales
 - ✏️ **Editor Canvas en tiempo real** - Edita cláusulas al instante
 - ✍️ **Firma digital integrada** - Envía por WhatsApp, firma con PIN
+- 📝 **Blog SEO optimizado** - CMS Sanity para contenido sin código
 - 📚 **Todo centralizado** - Contratos + chats + firmas en un solo lugar
 
 ---
@@ -70,6 +74,10 @@ LEXY es una plataforma SaaS que combina IA conversacional con generación autom�
 - **[TypeScript 5.9](https://www.typescriptlang.org/)** - Type safety
 - **[Tailwind CSS 4.1](https://tailwindcss.com/)** - Utility-first CSS
 - **[Framer Motion 12](https://www.framer.com/motion/)** - Animaciones fluidas
+
+### CMS & Content
+- **[Sanity.io](https://www.sanity.io/)** - Headless CMS para blog
+- **[Portable Text](https://portabletext.org/)** - Rich text editing
 
 ### Payments
 - **[Stripe](https://stripe.com/)** - Subscripciones con trial de 14 días
@@ -104,9 +112,14 @@ npm install
 
 Crea un archivo `.env.local` en la raíz:
 ```env
+# Stripe (opcional - solo para pagos)
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=tu_clave_publica_stripe
 STRIPE_SECRET_KEY=tu_clave_secreta_stripe
 STRIPE_PRICE_ID=tu_price_id_del_plan_pro
+
+# Sanity CMS (para blog)
+NEXT_PUBLIC_SANITY_PROJECT_ID=s5r9o1yx
+NEXT_PUBLIC_SANITY_DATASET=production
 ```
 
 4. **Ejecuta el servidor de desarrollo**
@@ -116,8 +129,37 @@ npm run dev
 
 5. **Abre tu navegador**
 ```
-http://localhost:3000
+http://localhost:3000         # Landing principal
+http://localhost:3000/urgente # Landing urgencia
+http://localhost:3000/blog    # Blog
+http://localhost:3000/studio  # CMS Sanity (requiere login)
 ```
+
+### 📝 Configurar Blog (Sanity)
+
+Si quieres usar el blog con Sanity CMS:
+
+1. **Login en Sanity CLI**
+```bash
+npx sanity login
+```
+
+2. **Crear dataset**
+```bash
+npx sanity dataset create production
+```
+
+3. **Configurar CORS** (permite localhost:3000)
+- Ve a: https://www.sanity.io/manage
+- Selecciona proyecto `s5r9o1yx`
+- API → CORS Origins → Add `http://localhost:3000`
+
+4. **Accede al Studio**
+```
+http://localhost:3000/studio
+```
+
+📚 **Documentación completa**: [`docs/SANITY-IMPLEMENTACION-COMPLETA.md`](docs/SANITY-IMPLEMENTACION-COMPLETA.md)
 
 ---
 
@@ -128,6 +170,15 @@ npm run dev      # Inicia servidor de desarrollo
 npm run build    # Crea build de producción
 npm run start    # Inicia servidor de producción
 npm run lint     # Ejecuta linter
+```
+
+### Scripts Sanity (Blog)
+
+```bash
+npx sanity login          # Login en Sanity CLI
+npx sanity deploy         # Deploy Studio a Sanity Cloud
+npx sanity manage         # Gestionar proyecto (abre navegador)
+npx sanity dataset create # Crear nuevo dataset
 ```
 
 ---
@@ -214,11 +265,32 @@ Este proyecto está bajo la licencia ISC.
 
 ---
 
+## 📚 Documentación
+
+### Guías Principales
+
+- 📘 **[Implementación Sanity Completa](docs/SANITY-IMPLEMENTACION-COMPLETA.md)** - Documentación completa del blog CMS
+- 📗 **[Setup Personal Sanity](docs/SETUP-SANITY-PERSONAL.md)** - Tu configuración específica (Project ID: s5r9o1yx)
+- 📕 **[Quick Start Sanity](docs/SANITY-QUICKSTART.md)** - Comandos esenciales (5 min)
+- 📙 **[Landing Urgente](docs/LANDING-URGENTE-IMPLEMENTACION.md)** - Spec landing /urgente
+
+### Contenido
+
+- 📝 **[Blog: Validez Legal IA](docs/CONTENIDO-BLOG-VALIDEZ-LEGAL.md)** - Artículo completo (5,200 palabras)
+
+### Diseño
+
+- 🎨 **[Restyling Guide](docs/RESTYLING.md)** - Sistema de diseño Apple-style con emerald
+
+---
+
 ## 🔗 Links
 
-- **🌐 Landing Page**: [https://lexyweb.vercel.app](https://lexyweb.vercel.app) ✅ **LIVE**
+- **🌐 Landing Principal**: [https://lexyweb.vercel.app](https://lexyweb.vercel.app) ✅ **LIVE**
+- **⚡ Landing Urgente**: [https://lexyweb.vercel.app/urgente](https://lexyweb.vercel.app/urgente) ✅ **LIVE**
+- **📝 Blog**: [https://lexyweb.vercel.app/blog](https://lexyweb.vercel.app/blog) ✅ **LIVE**
+- **🎨 Studio CMS**: http://localhost:3000/studio (local) o https://lexy.sanity.studio (cloud)
 - **📱 Aplicación**: [https://app.lexy.plus](https://app.lexy.plus)
-- **📚 Documentación**: [En desarrollo]
 - **💻 Repositorio**: [https://github.com/axeforeverjumo/lexyweb](https://github.com/axeforeverjumo/lexyweb)
 
 ---
