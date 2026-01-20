@@ -5,6 +5,70 @@ Todos los cambios notables de este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
+## [Unreleased] - Diseño de Pricing Multi-Tier
+
+### 🎯 Planned - Nueva Estructura de Pricing Premium
+
+**Estrategia:** Maximizar ingresos del segmento alto manteniendo 65€ como base premium (no competir en precio bajo como virtualmike.net 19€).
+
+#### Nuevos Planes (4 tiers)
+
+**PRO - 65€/mes** (actual, mantener)
+- 1 usuario individual
+- Todo ilimitado (contratos + consultas)
+- Base sólida para agentes individuales
+
+**TEAM - 150€/mes** (nuevo)
+- Hasta 3 usuarios
+- Chats compartidos entre equipo
+- Gestión de permisos (decide quién ve qué)
+- Dashboard de administración
+
+**BUSINESS - 299€/mes** (nuevo) 🔥
+- Hasta 4 usuarios
+- **Whitelabel: Tu logo en todos los contratos** ⭐ IMPORTANTE
+- Sube tus propios contratos personalizados
+- Modifica plantillas existentes a tu gusto
+- Formación personalizada (empresa del grupo)
+- Videollamadas de apoyo
+
+**ENTERPRISE - 500€/mes** (nuevo)
+- Hasta 7 usuarios
+- Success Manager dedicado
+- Formación continua para el equipo
+- Integración con ERP (SAP, Odoo, Holded) - presupuesto adicional
+- API access
+- Soporte VIP (2h response time)
+- SLA garantizado (99.9% uptime)
+
+#### Features Destacadas
+
+- ✅ **Whitelabel disponible desde BUSINESS** - Añade el logo del cliente en todos los contratos
+- ✅ **Sin límites artificiales** - Contratos y consultas ilimitados en TODOS los planes (diferenciador vs competencia)
+- ✅ **Verificación legal robusta** - Sistema de verificación continua sin acceso a datos sensibles del cliente
+- ✅ **Servicios humanos premium** - Formación real, videollamadas, success manager (no solo IA)
+- ✅ **Trial consistente** - 14 días gratis en todos los planes (Enterprise incluye demo previa)
+
+#### Documentación
+
+📄 Diseño completo: `docs/plans/2026-01-20-pricing-multi-tier-design.md`
+- Estructura de 4 tiers con features detalladas
+- Análisis competitivo vs virtualmike.net
+- Copy y propuesta de valor por tier
+- Guía completa de implementación técnica (Stripe + Frontend)
+- Tabla comparativa de features
+
+#### Ventaja Competitiva
+
+**LEXY vs virtualmike.net:**
+- MIKE BASIC 19€: 50 consultas/mes, sin contratos
+- MIKE PREMIUM 69€: 100 consultas/mes, 150 templates
+- MIKE ENTERPRISE 199€: ilimitado, 300+ templates, 2 usuarios
+
+**LEXY no limita consultas/contratos** - Nuestro diferenciador es garantía legal + privacidad + servicios humanos, no restricciones artificiales.
+
+---
+
 ## [2.0.0] - 2026-01-19
 
 ### 🎉 Major Update - Blog CMS + Landing Urgente
