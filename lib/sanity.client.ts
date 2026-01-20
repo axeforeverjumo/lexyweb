@@ -20,7 +20,16 @@ const builder = client ? imageUrlBuilder(client) : null;
 export function urlFor(source: any) {
   if (!builder) {
     console.warn('Sanity client not configured. Add NEXT_PUBLIC_SANITY_PROJECT_ID to environment variables.');
-    return { url: () => '' };
+    // Return a mock builder that supports chaining
+    const mockBuilder: any = {
+      url: () => '',
+      width: () => mockBuilder,
+      height: () => mockBuilder,
+      fit: () => mockBuilder,
+      auto: () => mockBuilder,
+      quality: () => mockBuilder,
+    };
+    return mockBuilder;
   }
   return builder.image(source);
 }
