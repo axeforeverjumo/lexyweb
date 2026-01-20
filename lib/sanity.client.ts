@@ -1,22 +1,33 @@
 import { createClient } from 'next-sanity';
 import imageUrlBuilder from '@sanity/image-url';
 
-export const client = createClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
-  apiVersion: '2024-01-01',
-  useCdn: true, // Set to false if statically generating pages, using ISR or tag-based revalidation
-});
+// Check if Sanity is configured
+const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
+const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production';
+
+export const client = projectId
+  ? createClient({
+      projectId,
+      dataset,
+      apiVersion: '2024-01-01',
+      useCdn: true,
+    })
+  : null;
 
 // Image URL builder
-const builder = imageUrlBuilder(client);
+const builder = client ? imageUrlBuilder(client) : null;
 
 export function urlFor(source: any) {
+  if (!builder) {
+    console.warn('Sanity client not configured. Add NEXT_PUBLIC_SANITY_PROJECT_ID to environment variables.');
+    return { url: () => '' };
+  }
   return builder.image(source);
 }
 
 // Queries
 export async function getAllPosts() {
+  if (!client) return [];
   return client.fetch(`
     *[_type == "post"] | order(publishedAt desc) {
       _id,
@@ -33,6 +44,7 @@ export async function getAllPosts() {
 }
 
 export async function getPostBySlug(slug: string) {
+  if (!client) return null;
   return client.fetch(
     `
     *[_type == "post" && slug.current == $slug][0] {
@@ -54,6 +66,7 @@ export async function getPostBySlug(slug: string) {
 }
 
 export async function getAllCategories() {
+  if (!client) return [];
   return client.fetch(`
     *[_type == "category"] | order(title asc) {
       _id,
@@ -65,6 +78,7 @@ export async function getAllCategories() {
 }
 
 export async function getPostsByCategory(categorySlug: string) {
+  if (!client) return [];
   return client.fetch(
     `
     *[_type == "post" && references(*[_type=="category" && slug.current == $categorySlug]._id)] | order(publishedAt desc) {
@@ -84,6 +98,7 @@ export async function getPostsByCategory(categorySlug: string) {
 }
 
 export async function getRecentPosts(limit: number = 3) {
+  if (!client) return [];
   return client.fetch(
     `
     *[_type == "post"] | order(publishedAt desc) [0...${limit}] {
