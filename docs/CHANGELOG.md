@@ -78,6 +78,24 @@ Todos los cambios notables del proyecto se documentan en este archivo.
 - Añadir columna `features` JSONB para control de acceso
 - Implementar control de permisos por tier
 
+### Fixes para Deployment en Vercel
+
+#### Sanity CMS Opcional
+- **Problema**: Build fallaba si no estaban configuradas las variables de entorno de Sanity
+- **Solución**: Hecho Sanity completamente opcional
+  - Cliente de Sanity solo se crea si existe `NEXT_PUBLIC_SANITY_PROJECT_ID`
+  - Todas las queries retornan arrays vacíos o `null` si Sanity no está configurado
+  - Mock builder con métodos chainables (`width()`, `height()`, `url()`, etc.)
+  - Warning en consola cuando se intenta usar sin configurar
+
+#### TypeScript Compatibility
+- Removida importación de tipos internos de Sanity (`@sanity/image-url/lib/types/types`)
+- Uso de `any` para evitar conflictos con tipos internos no exportados
+- Build exitoso sin dependencias opcionales configuradas
+
+#### Archivos Modificados
+- `lib/sanity.client.ts` - Hecho completamente opcional con mock builder
+
 ### Referencia
 
 Documentación completa del diseño: `docs/plans/2026-01-20-pricing-multi-tier-design.md`
