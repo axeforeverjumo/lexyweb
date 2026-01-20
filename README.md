@@ -21,6 +21,7 @@
 - ✅ **Landing page principal** - Diseño Apple-style minimalista
 - ✅ **Landing /urgente** - Foco en conversión inmediata (30 segundos)
 - ✅ **Blog con Sanity CMS** - Sistema completo sin código
+- ✅ **Pricing Multi-Tier** - 4 planes (PRO, TEAM, BUSINESS, ENTERPRISE)
 - ✅ **Diseño ultra-minimalista** - Apple-style con emerald accents
 - ✅ **Imágenes reales del producto** - 5 screenshots integrados
 - ✅ **Deployed en Vercel** - Auto-deploy configurado con GitHub
@@ -115,7 +116,12 @@ Crea un archivo `.env.local` en la raíz:
 # Stripe (opcional - solo para pagos)
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=tu_clave_publica_stripe
 STRIPE_SECRET_KEY=tu_clave_secreta_stripe
-STRIPE_PRICE_ID=tu_price_id_del_plan_pro
+
+# Stripe Price IDs (uno por cada tier)
+STRIPE_PRICE_ID_PRO=price_xxx
+STRIPE_PRICE_ID_TEAM=price_yyy
+STRIPE_PRICE_ID_BUSINESS=price_zzz
+STRIPE_PRICE_ID_ENTERPRISE=price_www
 
 # Sanity CMS (para blog)
 NEXT_PUBLIC_SANITY_PROJECT_ID=s5r9o1yx
@@ -201,10 +207,13 @@ Cuando quieras activar los pagos con Stripe:
 1. Ve a [Vercel Dashboard](https://vercel.com/dashboard)
 2. Selecciona el proyecto `lexyweb`
 3. Settings → Environment Variables
-4. Añade estas 3 variables:
+4. Añade estas variables:
    - `STRIPE_SECRET_KEY` - Tu clave secreta de Stripe
-   - `STRIPE_PRICE_ID_PRO` - Price ID del plan Pro
    - `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` - Clave pública de Stripe
+   - `STRIPE_PRICE_ID_PRO` - Price ID del plan Pro (65€)
+   - `STRIPE_PRICE_ID_TEAM` - Price ID del plan Team (150€)
+   - `STRIPE_PRICE_ID_BUSINESS` - Price ID del plan Business (299€)
+   - `STRIPE_PRICE_ID_ENTERPRISE` - Price ID del plan Enterprise (500€)
 5. Vercel hará redeploy automáticamente
 
 ### Deploy manual (si es necesario)
@@ -224,16 +233,54 @@ vercel --prod
 
 ## 📝 Pricing
 
-### Plan Gratis
-- 3 chats al año (consultas ilimitadas por chat)
-- 2 contratos al mes
-- Acceso a todas las plantillas
+Sistema de **4 tiers** diseñado para escalar desde agentes individuales hasta grandes grupos inmobiliarios:
 
-### Plan Pro - 65€/mes
-- **Chats ilimitados**
-- **Contratos ilimitados**
-- 14 días de prueba gratis
-- Sin permanencia
+### PRO - 65€/mes
+**Para agentes inmobiliarios individuales**
+- 1 usuario
+- Contratos ilimitados
+- Consultas IA 24/7 ilimitadas
+- 97 plantillas legales verificadas
+- Canvas de edición + Firmas digitales
+- Soporte 24/7 por Telegram
+- ✅ 14 días de prueba gratis
+
+### TEAM - 150€/mes ⭐ Más popular
+**Para agencias pequeñas (2-3 agentes)**
+- Hasta 3 usuarios
+- Chats compartidos entre equipo
+- Gestión de permisos y roles
+- Dashboard de administración
+- Todo lo de PRO incluido
+- Soporte prioritario (12h)
+- ✅ 14 días de prueba gratis
+
+### BUSINESS - 299€/mes 🎯 Recomendado
+**Para agencias medianas**
+- Hasta 4 usuarios
+- **Whitelabel: Tu logo en contratos**
+- **Sube tus contratos propios**
+- Modifica plantillas a tu gusto
+- Formación personalizada
+- Videollamadas de apoyo
+- Soporte prioritario (4h)
+- ✅ 14 días de prueba gratis
+
+### ENTERPRISE - 500€/mes 🏆
+**Para grandes grupos inmobiliarios**
+- Hasta 7 usuarios
+- Success Manager dedicado
+- Integración con ERP (SAP, Odoo, Holded)
+- API access completo
+- Formación continua
+- Soporte VIP (2h)
+- SLA garantizado 99.9%
+- Dashboard avanzado + SSO
+- ✅ Demo personalizada + 14 días gratis
+
+---
+
+**📊 Comparación completa**: Ver tabla comparativa de features en [docs/plans/2026-01-20-pricing-multi-tier-design.md](docs/plans/2026-01-20-pricing-multi-tier-design.md)
 
 ---
 
@@ -273,6 +320,11 @@ Este proyecto está bajo la licencia ISC.
 - 📗 **[Setup Personal Sanity](docs/SETUP-SANITY-PERSONAL.md)** - Tu configuración específica (Project ID: s5r9o1yx)
 - 📕 **[Quick Start Sanity](docs/SANITY-QUICKSTART.md)** - Comandos esenciales (5 min)
 - 📙 **[Landing Urgente](docs/LANDING-URGENTE-IMPLEMENTACION.md)** - Spec landing /urgente
+
+### Pricing y Planes
+
+- 💰 **[Diseño Pricing Multi-Tier](docs/plans/2026-01-20-pricing-multi-tier-design.md)** - Diseño completo de los 4 tiers
+- 📊 **[CHANGELOG](docs/CHANGELOG.md)** - Historial de cambios del proyecto
 
 ### Contenido
 
