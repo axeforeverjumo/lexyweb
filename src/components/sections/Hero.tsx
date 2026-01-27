@@ -58,13 +58,23 @@ export default function Hero() {
           transition={{ duration: 0.4, delay: 0.3, ease: [0, 0, 0.2, 1] }}
           className="flex flex-col items-center gap-3 mb-10"
         >
-          <Button
-            size="lg"
-            href="#precios"
-            className="px-10 py-4 text-base bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-600 shadow-2xl shadow-emerald-600/30 hover:shadow-emerald-500/40 border border-emerald-400/20"
-          >
-            Empezar AHORA - 30 segundos →
-          </Button>
+          <div className="flex flex-col sm:flex-row items-center gap-3">
+            <Button
+              size="lg"
+              href="/register"
+              className="px-10 py-4 text-base bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-600 shadow-2xl shadow-emerald-600/30 hover:shadow-emerald-500/40 border border-emerald-400/20"
+            >
+              Empezar AHORA - 30 segundos →
+            </Button>
+            <Button
+              size="lg"
+              variant="secondary"
+              href="/login"
+              className="px-8 py-4 text-base bg-white/10 text-white border-white/20 hover:bg-white/20 hover:border-white/30"
+            >
+              Iniciar sesión
+            </Button>
+          </div>
           <p className="text-xs text-gray-500">
             Sin tarjeta · Acceso inmediato · 14 días gratis
           </p>

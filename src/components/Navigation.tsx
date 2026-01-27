@@ -52,10 +52,13 @@ export default function Navigation() {
           </Link>
         </div>
 
-        {/* CTA Button */}
-        <div className="hidden md:block">
-          <Button size="sm" href="#precios">
-            Probar gratis
+        {/* Auth CTAs */}
+        <div className="hidden md:flex items-center space-x-3">
+          <Button variant="ghost" size="sm" href="/login">
+            Iniciar sesión
+          </Button>
+          <Button size="sm" href="/register">
+            Crear cuenta gratis
           </Button>
         </div>
 
@@ -102,9 +105,25 @@ export default function Navigation() {
             >
               FAQ
             </Link>
-            <Button size="sm" href="#precios" className="w-full">
-              Probar gratis
-            </Button>
+            <div className="pt-2 space-y-3">
+              <Button
+                variant="secondary"
+                size="sm"
+                href="/login"
+                className="w-full"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Iniciar sesión
+              </Button>
+              <Button
+                size="sm"
+                href="/register"
+                className="w-full"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Crear cuenta gratis
+              </Button>
+            </div>
           </div>
         </div>
       )}
