@@ -1,0 +1,60 @@
+
+> lexyapp@0.1.0 build
+> next build
+
+   ▲ Next.js 15.5.9
+   - Environments: .env.local
+   - Experiments (use with caution):
+     · serverActions
+
+   Creating an optimized production build ...
+> [PWA] Compile server
+> [PWA] Compile server
+> [PWA] Compile client (static)
+> [PWA] Auto register service worker with: /Users/juanmanuelojedagarcia/Documents/develop/Desarrollos internos/lexyweb/node_modules/next-pwa/register.js
+> [PWA] Service worker: /Users/juanmanuelojedagarcia/Documents/develop/Desarrollos internos/lexyweb/public/sw.js
+> [PWA]   url: /sw.js
+> [PWA]   scope: /
+Failed to compile.
+
+./app/globals.css
+Module not found: Can't resolve 'tailwindcss'
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/globals.css
+
+./app/globals.css
+Error: Can't resolve 'tailwindcss'
+    at finishWithoutResolve (/Users/juanmanuelojedagarcia/Documents/develop/Desarrollos internos/lexyweb/node_modules/next/dist/compiled/webpack/bundle5.js:1:191837)
+    at /Users/juanmanuelojedagarcia/Documents/develop/Desarrollos internos/lexyweb/node_modules/next/dist/compiled/webpack/bundle5.js:1:192737
+    at /Users/juanmanuelojedagarcia/Documents/develop/Desarrollos internos/lexyweb/node_modules/next/dist/compiled/webpack/bundle5.js:1:193370
+    at eval (eval at create (/Users/juanmanuelojedagarcia/Documents/develop/Desarrollos internos/lexyweb/node_modules/next/dist/compiled/webpack/bundle5.js:14:9224), <anonymous>:16:1)
+    at /Users/juanmanuelojedagarcia/Documents/develop/Desarrollos internos/lexyweb/node_modules/next/dist/compiled/webpack/bundle5.js:1:193370
+    at eval (eval at create (/Users/juanmanuelojedagarcia/Documents/develop/Desarrollos internos/lexyweb/node_modules/next/dist/compiled/webpack/bundle5.js:14:9224), <anonymous>:27:1)
+    at /Users/juanmanuelojedagarcia/Documents/develop/Desarrollos internos/lexyweb/node_modules/next/dist/compiled/webpack/bundle5.js:1:175252
+    at /Users/juanmanuelojedagarcia/Documents/develop/Desarrollos internos/lexyweb/node_modules/next/dist/compiled/webpack/bundle5.js:1:193370
+    at eval (eval at create (/Users/juanmanuelojedagarcia/Documents/develop/Desarrollos internos/lexyweb/node_modules/next/dist/compiled/webpack/bundle5.js:14:9224), <anonymous>:16:1)
+    at /Users/juanmanuelojedagarcia/Documents/develop/Desarrollos internos/lexyweb/node_modules/next/dist/compiled/webpack/bundle5.js:1:208998
+    at /Users/juanmanuelojedagarcia/Documents/develop/Desarrollos internos/lexyweb/node_modules/next/dist/compiled/webpack/bundle5.js:1:165692
+    at next (/Users/juanmanuelojedagarcia/Documents/develop/Desarrollos internos/lexyweb/node_modules/next/dist/compiled/webpack/bundle5.js:1:208939)
+    at forEachBail (/Users/juanmanuelojedagarcia/Documents/develop/Desarrollos internos/lexyweb/node_modules/next/dist/compiled/webpack/bundle5.js:1:209076)
+    at /Users/juanmanuelojedagarcia/Documents/develop/Desarrollos internos/lexyweb/node_modules/next/dist/compiled/webpack/bundle5.js:1:164876
+    at _next1 (eval at create (/Users/juanmanuelojedagarcia/Documents/develop/Desarrollos internos/lexyweb/node_modules/next/dist/compiled/webpack/bundle5.js:14:9224), <anonymous>:8:1)
+    at eval (eval at create (/Users/juanmanuelojedagarcia/Documents/develop/Desarrollos internos/lexyweb/node_modules/next/dist/compiled/webpack/bundle5.js:14:9224), <anonymous>:31:1)
+    at /Users/juanmanuelojedagarcia/Documents/develop/Desarrollos internos/lexyweb/node_modules/next/dist/compiled/webpack/bundle5.js:1:193370
+    at eval (eval at create (/Users/juanmanuelojedagarcia/Documents/develop/Desarrollos internos/lexyweb/node_modules/next/dist/compiled/webpack/bundle5.js:14:9224), <anonymous>:16:1)
+    at /Users/juanmanuelojedagarcia/Documents/develop/Desarrollos internos/lexyweb/node_modules/next/dist/compiled/webpack/bundle5.js:1:193370
+    at eval (eval at create (/Users/juanmanuelojedagarcia/Documents/develop/Desarrollos internos/lexyweb/node_modules/next/dist/compiled/webpack/bundle5.js:14:9224), <anonymous>:57:1)
+    at /Users/juanmanuelojedagarcia/Documents/develop/Desarrollos internos/lexyweb/node_modules/next/dist/compiled/webpack/bundle5.js:1:174262
+    at /Users/juanmanuelojedagarcia/Documents/develop/Desarrollos internos/lexyweb/node_modules/next/dist/compiled/webpack/bundle5.js:1:193370
+    at eval (eval at create (/Users/juanmanuelojedagarcia/Documents/develop/Desarrollos internos/lexyweb/node_modules/next/dist/compiled/webpack/bundle5.js:14:9224), <anonymous>:16:1)
+    at /Users/juanmanuelojedagarcia/Documents/develop/Desarrollos internos/lexyweb/node_modules/next/dist/compiled/webpack/bundle5.js:1:208998
+    at /Users/juanmanuelojedagarcia/Documents/develop/Desarrollos internos/lexyweb/node_modules/next/dist/compiled/webpack/bundle5.js:1:186670
+    at process.processTicksAndRejections (node:internal/process/task_queues:88:21)
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+> Build failed because of webpack errors
