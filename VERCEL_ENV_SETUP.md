@@ -1,109 +1,80 @@
-# 🔧 Configurar Variables de Entorno en Vercel
+# Configuración de Variables de Entorno en Vercel
 
-El error de Supabase (`TypeError: Failed to execute 'fetch'`) es porque las variables de entorno **NO están configuradas en Vercel**.
+## PROBLEMA IDENTIFICADO
 
-## 📋 Variables Necesarias
+El error `TypeError: Failed to execute 'fetch' on 'Window': Invalid value` ocurre porque las variables de entorno `NEXT_PUBLIC_SUPABASE_URL` y `NEXT_PUBLIC_SUPABASE_ANON_KEY` no están disponibles en el cliente de producción.
 
-**IMPORTANTE:** Los valores reales están en tu archivo `.env.local` local. NO los commiteamos a Git por seguridad.
+## CAUSA RAÍZ
 
-### 🔴 CRÍTICAS (Supabase - Causando el error actual)
+Las variables de entorno con prefijo `NEXT_PUBLIC_` en Next.js se **embeben en tiempo de build**, no en runtime. Esto significa que:
 
-```bash
-NEXT_PUBLIC_SUPABASE_URL=          # Ver .env.local línea 2
-NEXT_PUBLIC_SUPABASE_ANON_KEY=     # Ver .env.local línea 3
-SUPABASE_SERVICE_ROLE_KEY=         # Ver .env.local línea 4
+1. Si las variables no están presentes cuando Vercel ejecuta `npm run build`, el bundle resultante tendrá `undefined` hardcodeado
+2. Añadir las variables DESPUÉS del build no tiene efecto
+3. Necesitas **redeploy** después de configurar las variables
+
+## SOLUCIÓN: Configurar Variables en Vercel
+
+### Paso 1: Acceder a la configuración del proyecto
+
+1. Ve a tu proyecto en Vercel: https://vercel.com/dashboard
+2. Selecciona el proyecto `lexyweb`
+3. Ve a **Settings** → **Environment Variables**
+
+### Paso 2: Añadir las variables requeridas
+
+Añade estas **3 variables** exactamente como aparecen aquí:
+
+```
+NEXT_PUBLIC_SUPABASE_URL
+Value: https://supabase.odoo.barcelona
+Environments: ✓ Production ✓ Preview ✓ Development
 ```
 
-### 🟡 AI APIs
-
-```bash
-GEMINI_API_KEY=                    # Ver .env.local línea 7
-ANTHROPIC_API_KEY=                 # Ver .env.local línea 11
+```
+NEXT_PUBLIC_SUPABASE_ANON_KEY
+Value: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzdXBhYmFzZSIsImlhdCI6MTc2NjcxMzY4MCwiZXhwIjo0OTIyMzg3MjgwLCJyb2xlIjoiYW5vbiJ9.xMSCK41FQ6t1N5x-r3TXm30tRIURDAqN16tj8pW3tZA
+Environments: ✓ Production ✓ Preview ✓ Development
 ```
 
-### 🟢 App Config
-
-```bash
-NEXT_PUBLIC_APP_URL=https://www.lexy.plus
+```
+SUPABASE_SERVICE_ROLE_KEY
+Value: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzdXBhYmFzZSIsImlhdCI6MTc2NjcxMzY4MCwiZXhwIjo0OTIyMzg3MjgwLCJyb2xlIjoic2VydmljZV9yb2xlIn0.Vw7Aopd8gGRIoQA6vMZeFKq1Xyt0JdI6645EijHR2Pc
+Environments: ✓ Production ✓ Preview ✓ Development
 ```
 
-### 💳 Stripe
+### Paso 3: CRÍTICO - Redeploy
+
+**Después de añadir las variables, DEBES hacer un redeploy:**
 
 ```bash
-NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY= # Ver .env.local línea 17
-STRIPE_SECRET_KEY=                  # Ver .env.local línea 18
-STRIPE_PRICE_ID_PRO=                # Ver .env.local línea 22
-STRIPE_PRICE_ID_TEAM=               # Ver .env.local línea 23
-STRIPE_PRICE_ID_BUSINESS=           # Ver .env.local línea 24
-STRIPE_PRICE_ID_ENTERPRISE=         # Ver .env.local línea 25
+git commit --allow-empty -m "fix: trigger redeploy with env vars configured"
+git push
 ```
 
-### 🔵 Sanity CMS
+### Paso 4: Verificación
 
-```bash
-NEXT_PUBLIC_SANITY_PROJECT_ID=s5r9o1yx
-NEXT_PUBLIC_SANITY_DATASET=production
-```
+Abre https://www.lexy.plus/login en el navegador con DevTools abierto (F12).
 
-## 🚀 Opción 1: Script Automatizado (Recomendado)
+**Consola sin errores = Éxito ✅**
 
-```bash
-# En tu terminal local (donde está .env.local):
-cd /Users/juanmanuelojedagarcia/Documents/develop/Desarrollos\ internos/lexyweb
+## DEBUGGING
 
-# Ejecuta este comando para cada variable:
-vercel env add NOMBRE_VARIABLE production
+Si sigue sin funcionar después del redeploy:
 
-# Cuando te pida el valor, cópialo desde .env.local
-```
+1. **Verificar variables en el build de Vercel**
+   - Ve al deployment en Vercel
+   - Busca en el log: "Environments: .env.local"
+   - Debe listar tus variables
 
-## 🌐 Opción 2: Interfaz Web de Vercel
+2. **Probar localmente**
+   ```bash
+   npm run build
+   npm start
+   # http://localhost:3000/login
+   ```
 
-1. Ve a: https://vercel.com/axeforeverjumo/lexyweb/settings/environment-variables
-
-2. Click en "Add New"
-
-3. Para cada variable:
-   - Name: Copia el nombre (ej: `NEXT_PUBLIC_SUPABASE_URL`)
-   - Value: Copia el valor desde tu `.env.local`
-   - Environment: Selecciona "Production"
-   - Click "Save"
-
-4. Repite para TODAS las variables listadas arriba
-
-## 🔄 Después de Configurar
-
-**Vercel hará redeploy automáticamente** cuando agregues variables de entorno.
-
-O puedes forzar redeploy con:
-```bash
-vercel --prod
-```
-
-## ✅ Verificar que Funcionó
-
-1. Espera ~2 minutos al redeploy
-2. Ve a https://www.lexy.plus/login
-3. Intenta hacer login
-4. Si funciona: ✅ Variables configuradas correctamente
-5. Si sigue fallando: Revisa la consola del navegador (F12)
-
-## 🐛 Troubleshooting
-
-Si después de configurar las variables sigue sin funcionar:
-
-1. Verifica que las variables tengan el prefijo correcto:
-   - `NEXT_PUBLIC_` para variables que se usan en el frontend
-   - Sin prefijo para variables solo del backend
-
-2. Asegúrate de que las variables estén en **production** environment
-
-3. Verifica en Vercel dashboard que las variables aparecen listadas
-
-4. Fuerza un redeploy completo
-
-## 📝 Notas de Seguridad
-
-- **NUNCA** commiteesAPI keys a Git
-- Los valores reales solo existen en `.env.local` (local) y en Vercel (producción)
-- `.env.local` está en `.gitignore`
+3. **Inspeccionar bundle de producción**
+   - DevTools → Sources
+   - Busca "NEXT_PUBLIC_SUPABASE_URL"
+   - Si ves la URL → OK
+   - Si ves undefined → variables NO están en el build
