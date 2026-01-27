@@ -5,7 +5,7 @@ const withPWA = require('next-pwa')({
   disable: process.env.NODE_ENV === 'development',
   runtimeCaching: [
     {
-      urlPattern: /^https:\/\/.*\.supabase\.co\/.*/i,
+      urlPattern: /^https:\/\/(.*\.supabase\.co|supabase\.odoo\.barcelona)\/.*/i,
       handler: 'NetworkFirst',
       options: {
         cacheName: 'supabase-cache',
@@ -36,6 +36,10 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: '**.supabase.co',
+      },
+      {
+        protocol: 'https',
+        hostname: 'supabase.odoo.barcelona',
       },
     ],
   },
