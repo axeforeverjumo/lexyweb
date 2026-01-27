@@ -10,7 +10,9 @@
     "diagnose": "node diagnose-auth.js",
     "confirm-emails": "node confirm-emails.js",
     "test-supabase": "node test-supabase.js",
-    "verify-env": "node scripts/verify-env.js"
+    "verify-env": "node scripts/verify-env.js",
+    "redeploy": "bash scripts/redeploy.sh",
+    "check-production": "node scripts/check-production.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.71.2",
