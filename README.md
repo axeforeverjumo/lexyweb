@@ -1,362 +1,245 @@
-# LEXY - Tu Asistente Legal Inmobiliario con IA
+# LexyApp - Asistente Legal con IA
 
-> De conversación a contrato firmado en 4 pasos. Inteligencia artificial legal especializada para agentes inmobiliarios.
+<div align="center">
 
-[![Next.js](https://img.shields.io/badge/Next.js-16.1-black)](https://nextjs.org/)
-[![React](https://img.shields.io/badge/React-19.2-blue)](https://react.dev/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.1-38bdf8)](https://tailwindcss.com/)
-[![Sanity CMS](https://img.shields.io/badge/Sanity-CMS-f03e2f)](https://www.sanity.io/)
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?logo=vercel)](https://vercel.com)
-[![License](https://img.shields.io/badge/license-ISC-green)](LICENSE)
+**De conversación a contrato firmado en 3 pasos**
 
-## 🌐 Live Demo
+[![Next.js](https://img.shields.io/badge/Next.js-15-black)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-19-blue)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)](https://www.typescriptlang.org/)
+[![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-green)](https://supabase.com/)
 
-**🚀 [Ver Demo en Vivo](https://lexyweb.vercel.app)** ← Click aquí para ver la landing page
+Progressive Web App para creación de contratos inmobiliarios con inteligencia artificial
 
-> **Nota:** El checkout de Stripe está desactivado hasta configurar las variables de entorno. La landing page funciona perfectamente.
+**Estado: v1.1.0** | Firmas Digitales + Chat Persistente
 
-### 📊 Estado del Proyecto
-
-- ✅ **Landing page principal** - Diseño Apple-style minimalista
-- ✅ **Landing /urgente** - Foco en conversión inmediata (30 segundos)
-- ✅ **Blog con Sanity CMS** - Sistema completo sin código
-- ✅ **Pricing Multi-Tier** - 4 planes (PRO, TEAM, BUSINESS, ENTERPRISE)
-- ✅ **Diseño ultra-minimalista** - Apple-style con emerald accents
-- ✅ **Imágenes reales del producto** - 5 screenshots integrados
-- ✅ **Deployed en Vercel** - Auto-deploy configurado con GitHub
-- ✅ **Responsive design** - Mobile-first con Tailwind CSS 4
-- ✅ **Animaciones fluidas** - Framer Motion
-- ⏳ **Stripe checkout** - Pendiente configuración de variables de entorno
+</div>
 
 ---
 
-## 🎯 ¿Qué es LEXY?
+## 🎯 ¿Qué es LexyApp?
 
-LEXY es una plataforma SaaS que combina IA conversacional con generación automática de contratos legales para el sector inmobiliario. Sustituye semanas de trabajo legal por segundos de conversación.
+LexyApp es una plataforma SaaS de **asistencia legal especializada en derecho inmobiliario español** que combina:
 
-**De 600€ por contrato a 65€/mes ilimitado.**
-
-### ✨ Características principales
-
-- 💬 **Consultas legales 24/7** - IA entrenada por abogados expertos
-- 📄 **Generación de contratos en 30 segundos** - 97 plantillas profesionales
-- ✏️ **Editor Canvas en tiempo real** - Edita cláusulas al instante
-- ✍️ **Firma digital integrada** - Envía por WhatsApp, firma con PIN
-- 📝 **Blog SEO optimizado** - CMS Sanity para contenido sin código
-- 📚 **Todo centralizado** - Contratos + chats + firmas en un solo lugar
+- 🤖 **Chat IA conversacional** - Lexy responde consultas legales en tiempo real
+- 📄 **Generación automática de contratos** - Sistema híbrido Gemini + Claude
+- ✍️ **Firma digital integrada** - Canvas táctil y gestión de tokens
+- 📚 **97 templates profesionales** - Verificados por juristas
+- 🎨 **Canvas de edición en vivo** - Tipo ChatGPT Canvas
 
 ---
 
-## 🖼️ Capturas de pantalla
+## ✨ Características Principales
 
-### Dashboard principal
-![Dashboard LEXY](public/images/dashboard.png)
+### Sistema Híbrido de IA
+- **Gemini Flash (Google)** - Conversación, análisis, detección de necesidades
+- **Claude Sonnet 3.5 (Anthropic)** - Generación de documentos nivel abogado (10+ páginas)
+- **Marca LEXY unificada** - Sin referencias externas a proveedores de IA
 
-### Chat con Lexy
-![Chat conversacional](public/images/chat-con-lexy.png)
+### Flujos de Trabajo
+1. **Chat → Contrato**: Conversación natural detecta necesidad y genera documento
+2. **Canvas de Edición**: Chat izquierda + Documento derecha, edición en tiempo real
+3. **Firma Digital**: Tokens temporales, canvas táctil, PDF firmado automático
 
-### Generación de contratos
-![Generación automática](public/images/generacion-del-contrato.png)
-
-### Editor Canvas
-![Editor en tiempo real](public/images/canvas.png)
-
-### Firma digital
-![Sistema de firmas](public/images/firma-digital.png)
-
----
-
-## 🛠️ Tech Stack
-
-### Frontend
-- **[Next.js 16.1](https://nextjs.org/)** - React framework con App Router
-- **[React 19.2](https://react.dev/)** - Server & Client Components
-- **[TypeScript 5.9](https://www.typescriptlang.org/)** - Type safety
-- **[Tailwind CSS 4.1](https://tailwindcss.com/)** - Utility-first CSS
-- **[Framer Motion 12](https://www.framer.com/motion/)** - Animaciones fluidas
-
-### CMS & Content
-- **[Sanity.io](https://www.sanity.io/)** - Headless CMS para blog
-- **[Portable Text](https://portabletext.org/)** - Rich text editing
-
-### Payments
-- **[Stripe](https://stripe.com/)** - Subscripciones con trial de 14 días
-
-### Deployment
-- **[Vercel](https://vercel.com/)** - Hosting optimizado para Next.js
+### Tecnología
+- **Frontend**: Next.js 15 + React 19 + TypeScript + Tailwind CSS
+- **Backend**: Supabase (PostgreSQL + Auth + Storage)
+- **IA**: Google Gemini + Anthropic Claude
+- **Estado**: Zustand + RLS (Row Level Security)
 
 ---
 
-## 🚀 Instalación local
+## 🚀 Inicio Rápido
 
-### Prerrequisitos
+### Pre-requisitos
+- Node.js 18+
+- Cuenta Supabase
+- API Keys: Google Gemini + Anthropic Claude
 
-- Node.js 18+ instalado
-- npm o yarn
-- Git
+### Instalación
 
-### Pasos
-
-1. **Clona el repositorio**
 ```bash
-git clone https://github.com/axeforeverjumo/lexyweb.git
-cd lexyweb
-```
+# Clonar repositorio
+git clone https://github.com/tu-usuario/lexyapp.git
+cd lexyapp
 
-2. **Instala dependencias**
-```bash
+# Instalar dependencias
 npm install
-```
 
-3. **Configura variables de entorno**
+# Configurar variables de entorno
+cp .env.example .env.local
+# Editar .env.local con tus claves
 
-Crea un archivo `.env.local` en la raíz:
-```env
-# Stripe (opcional - solo para pagos)
-NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=tu_clave_publica_stripe
-STRIPE_SECRET_KEY=tu_clave_secreta_stripe
-
-# Stripe Price IDs (uno por cada tier)
-STRIPE_PRICE_ID_PRO=price_xxx
-STRIPE_PRICE_ID_TEAM=price_yyy
-STRIPE_PRICE_ID_BUSINESS=price_zzz
-STRIPE_PRICE_ID_ENTERPRISE=price_www
-
-# Sanity CMS (para blog)
-NEXT_PUBLIC_SANITY_PROJECT_ID=s5r9o1yx
-NEXT_PUBLIC_SANITY_DATASET=production
-```
-
-4. **Ejecuta el servidor de desarrollo**
-```bash
+# Iniciar servidor
 npm run dev
 ```
 
-5. **Abre tu navegador**
-```
-http://localhost:3000         # Landing principal
-http://localhost:3000/urgente # Landing urgencia
-http://localhost:3000/blog    # Blog
-http://localhost:3000/studio  # CMS Sanity (requiere login)
-```
+Abrir [http://localhost:3000](http://localhost:3000)
 
-### 📝 Configurar Blog (Sanity)
+### Variables de Entorno
 
-Si quieres usar el blog con Sanity CMS:
+```env
+# Supabase
+NEXT_PUBLIC_SUPABASE_URL=tu_url_supabase
+NEXT_PUBLIC_SUPABASE_ANON_KEY=tu_anon_key
+SUPABASE_SERVICE_ROLE_KEY=tu_service_role_key
 
-1. **Login en Sanity CLI**
-```bash
-npx sanity login
-```
+# IA
+GEMINI_API_KEY=tu_gemini_key
+ANTHROPIC_API_KEY=tu_anthropic_key
 
-2. **Crear dataset**
-```bash
-npx sanity dataset create production
-```
-
-3. **Configurar CORS** (permite localhost:3000)
-- Ve a: https://www.sanity.io/manage
-- Selecciona proyecto `s5r9o1yx`
-- API → CORS Origins → Add `http://localhost:3000`
-
-4. **Accede al Studio**
-```
-http://localhost:3000/studio
-```
-
-📚 **Documentación completa**: [`docs/SANITY-IMPLEMENTACION-COMPLETA.md`](docs/SANITY-IMPLEMENTACION-COMPLETA.md)
-
----
-
-## 📦 Scripts disponibles
-
-```bash
-npm run dev      # Inicia servidor de desarrollo
-npm run build    # Crea build de producción
-npm run start    # Inicia servidor de producción
-npm run lint     # Ejecuta linter
-```
-
-### Scripts Sanity (Blog)
-
-```bash
-npx sanity login          # Login en Sanity CLI
-npx sanity deploy         # Deploy Studio a Sanity Cloud
-npx sanity manage         # Gestionar proyecto (abre navegador)
-npx sanity dataset create # Crear nuevo dataset
+# App
+NEXT_PUBLIC_APP_URL=http://localhost:3000
 ```
 
 ---
 
-## 🌍 Deploy a producción
+## 📊 Estructura del Proyecto
 
-### ✅ Proyecto ya deployed en Vercel
-
-**URL Live:** [https://lexyweb.vercel.app](https://lexyweb.vercel.app)
-
-**🔄 Deploy automático configurado:**
-- Cada `git push` a `main` despliega automáticamente
-- Build time: ~2 minutos
-- Zero downtime deployments
-
-### Configurar variables de entorno en Vercel (para Stripe)
-
-Cuando quieras activar los pagos con Stripe:
-
-1. Ve a [Vercel Dashboard](https://vercel.com/dashboard)
-2. Selecciona el proyecto `lexyweb`
-3. Settings → Environment Variables
-4. Añade estas variables:
-   - `STRIPE_SECRET_KEY` - Tu clave secreta de Stripe
-   - `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` - Clave pública de Stripe
-   - `STRIPE_PRICE_ID_PRO` - Price ID del plan Pro (65€)
-   - `STRIPE_PRICE_ID_TEAM` - Price ID del plan Team (150€)
-   - `STRIPE_PRICE_ID_BUSINESS` - Price ID del plan Business (299€)
-   - `STRIPE_PRICE_ID_ENTERPRISE` - Price ID del plan Enterprise (500€)
-5. Vercel hará redeploy automáticamente
-
-### Deploy manual (si es necesario)
-
-```bash
-# Instalar Vercel CLI
-npm i -g vercel
-
-# Login
-vercel login
-
-# Deploy
-vercel --prod
+```
+src/
+├── app/                    # Next.js App Router
+│   ├── (dashboard)/        # Rutas protegidas (chat, contratos, dashboard)
+│   └── api/                # Backend APIs (Gemini, Claude, Contratos)
+├── components/             # Componentes React
+│   ├── ui/                 # Componentes base (shadcn/ui)
+│   ├── abogado/            # Sistema de chat
+│   └── contratos/          # Gestión de contratos + Canvas
+├── lib/                    # Lógica de negocio
+│   ├── supabase/           # Cliente Supabase (server/browser)
+│   ├── gemini/             # Cliente Gemini + prompts
+│   ├── claude/             # Cliente Claude + configuración
+│   └── store/              # Zustand stores
+└── types/                  # TypeScript definitions
 ```
 
 ---
 
-## 📝 Pricing
+## 📈 Estado del Proyecto
 
-Sistema de **4 tiers** diseñado para escalar desde agentes individuales hasta grandes grupos inmobiliarios:
+### ✅ Completado (v1.1.0)
 
-### PRO - 65€/mes
-**Para agentes inmobiliarios individuales**
-- 1 usuario
-- Contratos ilimitados
-- Consultas IA 24/7 ilimitadas
-- 97 plantillas legales verificadas
-- Canvas de edición + Firmas digitales
-- Soporte 24/7 por Telegram
-- ✅ 14 días de prueba gratis
+**Core:**
+- [x] Autenticación completa (Supabase Auth)
+- [x] Chat persistente con historial en BD
+- [x] Dashboard con filtros y estadísticas
+- [x] RLS completo en todas las tablas
 
-### TEAM - 150€/mes ⭐ Más popular
-**Para agencias pequeñas (2-3 agentes)**
-- Hasta 3 usuarios
-- Chats compartidos entre equipo
-- Gestión de permisos y roles
-- Dashboard de administración
-- Todo lo de PRO incluido
-- Soporte prioritario (12h)
-- ✅ 14 días de prueba gratis
+**Contratos:**
+- [x] 97 templates profesionales
+- [x] Búsqueda híbrida IA (vectorial + keywords + metadata)
+- [x] Generación automática con Claude
+- [x] Canvas de edición tipo ChatGPT (v1.0)
+- [x] Edición en tiempo real automática (v1.0)
 
-### BUSINESS - 299€/mes 🎯 Recomendado
-**Para agencias medianas**
-- Hasta 4 usuarios
-- **Whitelabel: Tu logo en contratos**
-- **Sube tus contratos propios**
-- Modifica plantillas a tu gusto
-- Formación personalizada
-- Videollamadas de apoyo
-- Soporte prioritario (4h)
-- ✅ 14 días de prueba gratis
+**Firmas:**
+- [x] Sistema de firmas digitales (v1.1)
+- [x] Canvas táctil HTML5
+- [x] Tokens temporales + PINs
+- [x] API prepare-signature + sign/[token]
+- [x] Página pública de firma
 
-### ENTERPRISE - 500€/mes 🏆
-**Para grandes grupos inmobiliarios**
-- Hasta 7 usuarios
-- Success Manager dedicado
-- Integración con ERP (SAP, Odoo, Holded)
-- API access completo
-- Formación continua
-- Soporte VIP (2h)
-- SLA garantizado 99.9%
-- Dashboard avanzado + SSO
-- ✅ Demo personalizada + 14 días gratis
+### 🔜 Próximas Fases
+
+**FASE 3: Exportación Avanzada**
+- [ ] Generación PDF profesional
+- [ ] Generación Word (.docx) editable
+- [ ] Plantillas de email
+
+**FASE 4: Analytics**
+- [ ] Dashboard de métricas
+- [ ] Logs de generaciones
+- [ ] Panel admin para templates
 
 ---
 
-**📊 Comparación completa**: Ver tabla comparativa de features en [docs/plans/2026-01-20-pricing-multi-tier-design.md](docs/plans/2026-01-20-pricing-multi-tier-design.md)
+## 💰 Costos de Operación
+
+### Por Contrato Generado
+
+| Servicio | Uso | Costo |
+|----------|-----|-------|
+| Gemini (Chat + Análisis) | ~5,000 tokens | ~0.006€ |
+| Claude (Documento Final) | ~20,000 tokens | ~0.15€ |
+| **TOTAL** | - | **~0.16€** |
+
+**Valor generado:** 300-800€ (precio abogado tradicional)
+**Ahorro:** 99.95%
 
 ---
 
-## 🎨 Diseño
+## 📚 Documentación
 
-Inspiración: **Apple-style minimalism**
-- Fondo blanco limpio
-- Naranja cálido (#FF6B35) como acento
-- Tipografía: Manrope (200-800)
-- Animaciones sutiles con Framer Motion
+| Archivo | Descripción |
+|---------|-------------|
+| [ESTADO.md](./ESTADO.md) | Estado técnico completo del proyecto |
+| [CONTEXT.md](./CONTEXT.md) | Visión, contexto e intenciones del proyecto |
+| Este archivo (README.md) | Landing y guía rápida |
+
+---
+
+## 🛠️ Scripts Útiles
+
+```bash
+# Desarrollo
+npm run dev              # Servidor de desarrollo
+npm run build            # Build de producción
+npm run lint             # Linting
+
+# Procesamiento de contratos
+npx tsx scripts/batch-process-contracts.ts    # Procesar Word → JSON
+npx tsx scripts/batch-load-to-db.ts           # Cargar a Supabase
+npx tsx scripts/test-hybrid-search.ts         # Test búsqueda híbrida
+```
+
+---
+
+## 🎯 Métricas Clave
+
+| Métrica | Valor |
+|---------|-------|
+| Templates cargados | 97 |
+| Precisión búsqueda | 60-75% |
+| Tiempo de búsqueda | <2s |
+| Tiempo de generación | ~30s |
+| Dimensiones embedding | 768 |
+| Costo IA por contrato | 0.16€ |
+
+---
+
+## 🔒 Seguridad
+
+- ✅ HTTPS obligatorio en producción
+- ✅ Row Level Security (RLS) en todas las tablas
+- ✅ Validación client + server side
+- ✅ JWT tokens con Supabase Auth
+- ✅ Secrets en variables de entorno
+- ✅ CORS configurado
 
 ---
 
 ## 🤝 Contribuir
 
-Las contribuciones son bienvenidas. Para cambios importantes:
-
 1. Fork el proyecto
-2. Crea una rama (`git checkout -b feature/NuevaCaracteristica`)
-3. Commit tus cambios (`git commit -m 'feat: añadir nueva característica'`)
-4. Push a la rama (`git push origin feature/NuevaCaracteristica`)
+2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'feat: add AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
 5. Abre un Pull Request
 
 ---
 
 ## 📄 Licencia
 
-Este proyecto está bajo la licencia ISC.
+Privado - Todos los derechos reservados
 
 ---
 
-## 📚 Documentación
+<div align="center">
 
-### Guías Principales
+**Construido con Next.js, Supabase, Gemini AI y Claude**
 
-- 📘 **[Implementación Sanity Completa](docs/SANITY-IMPLEMENTACION-COMPLETA.md)** - Documentación completa del blog CMS
-- 📗 **[Setup Personal Sanity](docs/SETUP-SANITY-PERSONAL.md)** - Tu configuración específica (Project ID: s5r9o1yx)
-- 📕 **[Quick Start Sanity](docs/SANITY-QUICKSTART.md)** - Comandos esenciales (5 min)
-- 📙 **[Landing Urgente](docs/LANDING-URGENTE-IMPLEMENTACION.md)** - Spec landing /urgente
+Última actualización: 1 Enero 2026 | Versión 1.1.0
 
-### Pricing y Planes
+[Estado](./ESTADO.md) · [Contexto](./CONTEXT.md) · [Issues](https://github.com/tu-usuario/lexyapp/issues)
 
-- 💰 **[Diseño Pricing Multi-Tier](docs/plans/2026-01-20-pricing-multi-tier-design.md)** - Diseño completo de los 4 tiers
-- 📊 **[CHANGELOG](docs/CHANGELOG.md)** - Historial de cambios del proyecto
-
-### Contenido
-
-- 📝 **[Blog: Validez Legal IA](docs/CONTENIDO-BLOG-VALIDEZ-LEGAL.md)** - Artículo completo (5,200 palabras)
-
-### Diseño
-
-- 🎨 **[Restyling Guide](docs/RESTYLING.md)** - Sistema de diseño Apple-style con emerald
-
----
-
-## 🔗 Links
-
-- **🌐 Landing Principal**: [https://lexyweb.vercel.app](https://lexyweb.vercel.app) ✅ **LIVE**
-- **⚡ Landing Urgente**: [https://lexyweb.vercel.app/urgente](https://lexyweb.vercel.app/urgente) ✅ **LIVE**
-- **📝 Blog**: [https://lexyweb.vercel.app/blog](https://lexyweb.vercel.app/blog) ✅ **LIVE**
-- **🎨 Studio CMS**: http://localhost:3000/studio (local) o https://lexy.sanity.studio (cloud)
-- **📱 Aplicación**: [https://app.lexy.plus](https://app.lexy.plus)
-- **💻 Repositorio**: [https://github.com/axeforeverjumo/lexyweb](https://github.com/axeforeverjumo/lexyweb)
-
----
-
-## 👥 Equipo
-
-Desarrollado con ❤️ para revolucionar el sector legal inmobiliario.
-
----
-
-## 📧 Contacto
-
-¿Preguntas? ¿Feedback? Contáctanos en [hola@lexy.plus](mailto:hola@lexy.plus)
-
----
-
-**⚡ LEXY - Contratos inteligentes para agentes inteligentes**
+</div>

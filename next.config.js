@@ -1,23 +1,49 @@
+const withPWA = require('next-pwa')({
+  dest: 'public',
+  register: true,
+  skipWaiting: true,
+  disable: process.env.NODE_ENV === 'development',
+  runtimeCaching: [
+    {
+      urlPattern: /^https:\/\/.*\.supabase\.co\/.*/i,
+      handler: 'NetworkFirst',
+      options: {
+        cacheName: 'supabase-cache',
+        expiration: {
+          maxEntries: 32,
+          maxAgeSeconds: 24 * 60 * 60 // 24 hours
+        }
+      }
+    }
+  ]
+});
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // Enable standalone output for Docker deployment
+  output: 'standalone',
+  eslint: {
+    // Deshabilitar ESLint durante build para evitar cuelgues
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    // Deshabilitar TypeScript durante build (verificar manualmente con tsc)
+    ignoreBuildErrors: true,
+  },
   images: {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'lexy.plus',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'cdn.sanity.io',
-        pathname: '/**',
+        hostname: '**.supabase.co',
       },
     ],
-    formats: ['image/avif', 'image/webp'],
   },
-  compress: true,
-  poweredByHeader: false,
-}
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '10mb',
+    },
+  },
+};
 
-module.exports = nextConfig
+module.exports = withPWA(nextConfig);

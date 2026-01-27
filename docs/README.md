@@ -1,146 +1,297 @@
-# Documentación LEXY Landing Page
+# DOCS - Documentación de Restyling LEXY
 
-**Última actualización**: 2026-01-19
-
-Esta carpeta contiene la documentación consolidada del proyecto LEXY Landing Page.
+**Fecha de creación**: 2026-01-20
+**Propósito**: Guías para replicar el diseño moderno de lexyweb en lexyapp
 
 ---
 
-## 📚 Documentación Principal
+## 📁 Estructura de Documentos
 
-### [PROYECTO.md](./PROYECTO.md)
-**Diseño, Contenido y Visión del Producto**
+```
+DOCS/
+├── README.md                    # Este archivo - Guía de navegación
+├── DESIGN-SYSTEM.md             # Sistema de diseño completo
+├── RESTYLING-PLAN.md            # Plan de implementación por fases
+└── COMPONENTS-REFERENCE.md      # Código copiable listo para usar
+```
 
-Contiene:
-- Visión y objetivos del proyecto
-- Filosofía y concepto de diseño
-- Sistema de diseño completo (colores, tipografía, espaciado, efectos)
-- Estructura de contenido por sección
-- Descripción de todos los componentes
-- Historial de mejoras visuales recientes
+---
+
+## 📚 Guía de Uso
+
+### 1. **Empieza aquí** → DESIGN-SYSTEM.md
+
+**Cuándo usar:** Primera lectura, entender filosofía de diseño
+
+**Contenido:**
+- Filosofía de diseño "Modern Minimalism with Impact"
+- Sistema completo de color (Emerald palette)
+- Tipografía (Inter Variable Font)
+- Espaciado y layout
+- Efectos visuales modernos:
+  - Grid pattern
+  - Gradient mesh backgrounds
+  - Glassmorphism
+  - Gradient text
+  - Hover effects
+- Componentes base conceptuales
+- Patrones de diseño
+- Guía de implementación en lexyapp
+
+**Ideal para:**
+- Entender el "por qué" del diseño
+- Conocer las reglas de uso del verde esmeralda
+- Aprender el sistema de espaciado
+- Ver ejemplos de efectos visuales
+
+### 2. **Planifica** → RESTYLING-PLAN.md
+
+**Cuándo usar:** Antes de empezar a codear, para tener una hoja de ruta
+
+**Contenido:**
+- Análisis de brecha (lexyweb vs lexyapp actual)
+- Objetivos del restyling
+- Fases de implementación:
+  - **Fase 1**: Fundamentos (globals.css, componentes base)
+  - **Fase 2**: Componentes principales (Dashboard, Navigation)
+  - **Fase 3**: Páginas de contrato
+  - **Fase 4**: Detalles y pulido
+- Checklist completa de implementación
+- Ejemplos de transformación (Antes/Después)
+- Tiempos estimados
 - Próximos pasos
 
-**Cuándo leerlo:**
-- Para entender la visión del producto
-- Al diseñar nuevas secciones o componentes
-- Al actualizar el contenido
-- Para mantener consistencia visual
+**Ideal para:**
+- Planificar el trabajo por fases
+- Priorizar tareas
+- Estimar tiempos
+- Hacer seguimiento del progreso
 
-### [IMPLEMENTACION.md](./IMPLEMENTACION.md)
-**Setup Técnico, Integraciones y Deploy**
+### 3. **Copia código** → COMPONENTS-REFERENCE.md
 
-Contiene:
-- Stack tecnológico completo
-- Configuración del proyecto (Next.js, Tailwind, TypeScript)
-- Integración de Stripe para pagos
-- SEO y optimización de performance
-- Deployment a Vercel
-- Integración de Sanity CMS
-- Troubleshooting y comandos útiles
+**Cuándo usar:** Durante la implementación, para copiar y pegar código
 
-**Cuándo leerlo:**
-- Al hacer setup inicial del proyecto
-- Para configurar integraciones (Stripe, Sanity)
-- Al hacer deploy
-- Al resolver problemas técnicos
-- Para optimizar SEO y performance
+**Contenido:**
+- Buttons (primary, gradient, secondary, ghost, icon)
+- Cards (basic, feature, stats, conversation)
+- Badges & Pills (simple, pulsing dot, status)
+- Sections (wrapper, fondo negro, hero)
+- Navigation (glassmorphic, sidebar)
+- Effects (gradient text, gradient orbs, glassmorphism, overlays)
+- Animations (Framer Motion patterns)
+- Layouts (dashboard, sidebar, modal)
+- Quick copy classes (grid pattern, glassmorphism, etc.)
+
+**Ideal para:**
+- Copiar código listo para usar
+- Ver ejemplos prácticos
+- Encontrar clases de Tailwind específicas
+- Implementar rápido sin pensar
 
 ---
 
-## 🗂️ Estructura
+## 🚀 Flujo de Trabajo Recomendado
 
+### Para empezar el restyling (Primera vez)
+
+1. **Leer** DESIGN-SYSTEM.md completo (30-45 min)
+   - Entender filosofía y reglas
+   - Familiarizarse con el sistema de color
+   - Ver ejemplos de efectos visuales
+
+2. **Revisar** RESTYLING-PLAN.md (15-20 min)
+   - Ver análisis de brecha
+   - Entender las 4 fases
+   - Revisar checklist
+
+3. **Empezar** Fase 1: Fundamentos
+   - Actualizar `globals.css` (usar código de DESIGN-SYSTEM.md)
+   - Crear componentes base (copiar de COMPONENTS-REFERENCE.md)
+
+### Durante la implementación (Día a día)
+
+1. **Consultar** RESTYLING-PLAN.md
+   - Ver qué tareas siguen
+   - Marcar tareas completadas
+   - Actualizar estado
+
+2. **Copiar** de COMPONENTS-REFERENCE.md
+   - Buscar el componente que necesitas
+   - Copiar código
+   - Adaptar a tu caso
+
+3. **Verificar** en DESIGN-SYSTEM.md
+   - Si tienes dudas sobre colores
+   - Si necesitas saber reglas de uso
+   - Si quieres entender el "por qué"
+
+### Para revisar progreso (Semanal)
+
+1. **Actualizar** RESTYLING-PLAN.md
+   - Marcar fases completadas
+   - Actualizar "Próximos Pasos"
+   - Documentar issues encontrados
+
+2. **Añadir** a COMPONENTS-REFERENCE.md
+   - Si creaste nuevos componentes útiles
+   - Si encontraste mejores patrones
+   - Si hay código que vale la pena compartir
+
+---
+
+## 🎯 Casos de Uso Comunes
+
+### "Quiero modernizar un botón"
+
+1. Ve a COMPONENTS-REFERENCE.md → Buttons
+2. Copia el código del tipo de botón que necesitas
+3. Adapta texto y acciones
+
+### "Quiero añadir grid pattern a una página"
+
+1. Ve a COMPONENTS-REFERENCE.md → Sections
+2. Copia "Section Wrapper con Grid Pattern"
+3. Pega como wrapper de tu página
+
+### "No sé qué color emerald usar"
+
+1. Ve a DESIGN-SYSTEM.md → Sistema de Color
+2. Lee "Reglas de Uso del Verde Esmeralda"
+3. Ve ejemplos de aplicación
+
+### "Quiero saber qué hacer hoy"
+
+1. Ve a RESTYLING-PLAN.md → Checklist de Implementación
+2. Busca el primer item sin marcar ⏳
+3. Sigue las instrucciones de esa fase
+
+### "¿Cuánto tiempo tomará esto?"
+
+1. Ve a RESTYLING-PLAN.md → Fases de Implementación
+2. Cada fase tiene tiempo estimado
+3. Suma total: ~30-40 horas
+
+### "Necesito crear un card con hover"
+
+1. Ve a COMPONENTS-REFERENCE.md → Cards
+2. Copia "Basic Card con Hover"
+3. Personaliza contenido
+
+---
+
+## 📖 Referencia Rápida
+
+### Colores Clave
+
+```css
+--emerald-400: #34D399  /* Gradientes */
+--emerald-600: #059669  /* Primary CTA */
+--emerald-700: #047857  /* Hover */
 ```
-docs/
-├── README.md                 ← Este archivo
-├── PROYECTO.md              ← Diseño y contenido
-├── IMPLEMENTACION.md        ← Setup técnico
-└── archive/                 ← Documentación histórica
-    ├── RESTYLING.md
-    ├── CONTENIDO-*.md
-    ├── PLAN-SEO-ESTRATEGICO.md
-    ├── SANITY-*.md
-    └── plans/
-        └── 2026-01-08-lexy-landing-page.md
+
+### Espaciado Común
+
+```tsx
+py-12   // Entre secciones (48px)
+py-8    // Dentro de secciones (32px)
+gap-6   // Entre elementos (24px)
+p-6     // Padding componentes (24px)
+```
+
+### Clases Más Usadas
+
+```tsx
+// Grid pattern
+bg-[linear-gradient(to_right,#00000008_1px,transparent_1px),linear-gradient(to_bottom,#00000008_1px,transparent_1px)] bg-[size:24px_24px]
+
+// Glassmorphism
+bg-white/80 backdrop-blur-xl
+
+// Gradient text
+bg-gradient-to-r from-emerald-400 to-emerald-600 text-transparent bg-clip-text
+
+// Hover emerald shadow
+hover:shadow-[0_0_0_3px_rgba(5,150,105,0.1)]
 ```
 
 ---
 
-## 🎯 Quick Start
+## 🔄 Mantenimiento de Docs
 
-### Para Diseñadores
-1. Lee [PROYECTO.md](./PROYECTO.md) sección "Sistema de Diseño"
-2. Revisa "Estructura de Contenido"
-3. Consulta "Componentes Implementados"
+### Cuándo actualizar cada documento
 
-### Para Desarrolladores
-1. Lee [IMPLEMENTACION.md](./IMPLEMENTACION.md) sección "Configuración del Proyecto"
-2. Sigue "Setup Local"
-3. Consulta "Troubleshooting" si hay problemas
+**DESIGN-SYSTEM.md** - Actualizar si:
+- Cambia la filosofía de diseño
+- Se añaden nuevos colores o tokens
+- Cambian reglas de uso
+- Se descubren nuevos patrones
 
-### Para Product Managers
-1. Lee [PROYECTO.md](./PROYECTO.md) sección "Visión y Objetivos"
-2. Revisa "Estructura de Contenido"
-3. Consulta [IMPLEMENTACION.md](./IMPLEMENTACION.md) sección "Métricas de Éxito"
+**RESTYLING-PLAN.md** - Actualizar:
+- Al completar cada fase
+- Al encontrar issues bloqueantes
+- Cambios en prioridades
+- Nuevos descubrimientos
 
----
+**COMPONENTS-REFERENCE.md** - Actualizar:
+- Al crear nuevos componentes reutilizables
+- Al mejorar patrones existentes
+- Al encontrar mejores formas de hacer algo
 
-## 📦 Documentación Archivada
+### Versionado
 
-La carpeta `archive/` contiene documentación histórica del proyecto que fue consolidada en los 2 archivos principales. Útil para referencia histórica pero no necesaria para el día a día.
+Formato: `v[fase].[mejora]`
 
-**Contenido del archivo:**
-- Planes de implementación originales
-- Borradores de contenido
-- Documentación de SEO estratégico
-- Setup guides individuales de Sanity
-- Posts de blog planificados
-
----
-
-## 🔄 Actualización de Documentación
-
-**Cuándo actualizar:**
-
-### PROYECTO.md
-- Al cambiar colores, tipografía o espaciado
-- Al añadir nuevas secciones o componentes
-- Al modificar contenido importante
-- Al implementar mejoras visuales
-
-### IMPLEMENTACION.md
-- Al actualizar dependencias
-- Al cambiar configuraciones
-- Al añadir nuevas integraciones
-- Al resolver problemas comunes
-
-**Cómo actualizar:**
-1. Edita el archivo correspondiente
-2. Actualiza la fecha en el header
-3. Documenta el cambio en la sección apropiada
-4. Commit con mensaje descriptivo:
-   ```bash
-   git commit -m "docs: update [PROYECTO/IMPLEMENTACION] - [descripción]"
-   ```
+Ejemplo:
+- v1.0 - Fase 1 completada
+- v1.1 - Mejoras a Fase 1
+- v2.0 - Fase 2 completada
 
 ---
 
-## 💡 Tips
+## 🤝 Contribuir
 
-- **Buscar en documentación**: Usa Cmd+F en tu editor
-- **Referencias cruzadas**: Ambos docs se referencian mutuamente
-- **Código actualizado**: La documentación refleja el estado actual del código
-- **Ejemplos de código**: Todos los snippets son funcionales y testeados
+Si encuentras mejoras o nuevos patrones:
 
----
-
-## 📞 Contacto
-
-Para preguntas sobre la documentación:
-- **Proyecto/Diseño**: [Team Design]
-- **Implementación/Técnico**: [Team Engineering]
-- **General**: [Product Manager]
+1. Añádelos a COMPONENTS-REFERENCE.md
+2. Documenta el "por qué" en DESIGN-SYSTEM.md si es relevante
+3. Actualiza el checklist en RESTYLING-PLAN.md
 
 ---
 
-**Última consolidación**: 2026-01-19
-**Versión**: 2.0 (Documentación consolidada)
+## 📞 Recursos Externos
+
+### Inspiración Original
+- **lexyweb**: `~/Documents/develop/Desarrollos internos/lexyweb`
+- **PROYECTO.md** (lexyweb): Documentación original completa
+
+### Herramientas
+- [Inter Font](https://rsms.me/inter/) - Tipografía oficial
+- [Tailwind CSS](https://tailwindcss.com/) - Framework CSS
+- [Framer Motion](https://www.framer.com/motion/) - Animaciones
+- [Lucide Icons](https://lucide.dev/) - Iconos (si usas)
+
+### Referencias de Diseño
+- Apple.com - Minimalismo extremo
+- Linear.app - Tipografía y animaciones
+- HubSpot - Alternancia de secciones
+- Arc Browser - Detalles sutiles
+
+---
+
+## ✅ Quick Start Checklist
+
+Para empezar el restyling HOY:
+
+- [ ] Leer DESIGN-SYSTEM.md (sección Sistema de Color)
+- [ ] Leer RESTYLING-PLAN.md (Fase 1 completa)
+- [ ] Actualizar `globals.css` con tokens
+- [ ] Crear carpeta `src/components/ui/`
+- [ ] Copiar Button.tsx de COMPONENTS-REFERENCE.md
+- [ ] Probar primer componente modernizado
+
+**Tiempo total:** ~2-3 horas para empezar
+
+---
+
+**Última actualización**: 2026-01-20
+**Versión**: 1.0 - Documentación inicial completa
