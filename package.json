@@ -9,7 +9,8 @@
     "lint": "next lint",
     "diagnose": "node diagnose-auth.js",
     "confirm-emails": "node confirm-emails.js",
-    "test-supabase": "node test-supabase.js"
+    "test-supabase": "node test-supabase.js",
+    "verify-env": "node scripts/verify-env.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.71.2",
