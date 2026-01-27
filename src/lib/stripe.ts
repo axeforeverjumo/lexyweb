@@ -9,7 +9,7 @@ if (!process.env.STRIPE_SECRET_KEY && process.env.NODE_ENV === 'production') {
 }
 
 export const stripe = new Stripe(STRIPE_KEY, {
-  apiVersion: '2025-12-15.clover',
+  apiVersion: '2025-02-24.acacia',
   typescript: true,
 });
 
