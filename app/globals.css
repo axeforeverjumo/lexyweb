@@ -1,7 +1,10 @@
 @import url('https://rsms.me/inter/inter.css');
-@import "tailwindcss";
 
-@theme {
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
   /* Inter Variable Font - Apple-style typography */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
 
