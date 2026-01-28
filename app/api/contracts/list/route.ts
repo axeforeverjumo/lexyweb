@@ -23,10 +23,10 @@ export async function GET(request: NextRequest) {
     // 2. Listar contratos
     const contratos = await contractGenerator.listUserContracts(user.id);
 
-    // 3. Retornar lista
+    // 3. Retornar lista (usando "contracts" para consistencia con frontend)
     return NextResponse.json({
       success: true,
-      contratos
+      contracts: contratos
     });
 
   } catch (error) {

@@ -289,7 +289,7 @@ Genera el contrato final en Markdown, manteniendo la estructura de la plantilla:
 
     const { data, error } = await supabase
       .from('contract_generations')
-      .select('id, titulo, estado, created_at, idioma')
+      .select('id, titulo, estado, created_at, idioma, template_id')
       .eq('user_id', userId)
       .order('created_at', { ascending: false });
 
