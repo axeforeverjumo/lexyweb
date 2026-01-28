@@ -72,8 +72,11 @@ export default function ContractDetailView({ contract }: ContractDetailViewProps
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const estadoInfo = estadoConfig[contract.estado];
-  const idiomaLabel = idiomaConfig[contract.idioma];
+  const estadoInfo = estadoConfig[contract.estado] || {
+    label: 'Desconocido',
+    className: 'bg-gray-100 text-gray-800 border-gray-200',
+  };
+  const idiomaLabel = idiomaConfig[contract.idioma] || 'Español';
 
   const handleDelete = async () => {
     try {
