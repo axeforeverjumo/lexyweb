@@ -54,8 +54,11 @@ const idiomaConfig = {
 };
 
 export default function ContractCard({ contract, onDelete, onUpdateTitle }: ContractCardProps) {
-  const estadoInfo = estadoConfig[contract.estado];
-  const idiomaLabel = idiomaConfig[contract.idioma];
+  const estadoInfo = estadoConfig[contract.estado] || {
+    label: 'Desconocido',
+    className: 'bg-gray-100 text-gray-700 border-gray-200',
+  };
+  const idiomaLabel = idiomaConfig[contract.idioma] || 'Español';
 
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [editedTitle, setEditedTitle] = useState(contract.titulo);
