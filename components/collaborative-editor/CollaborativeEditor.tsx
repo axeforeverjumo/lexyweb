@@ -8,6 +8,7 @@ import CollaborationCursor from '@tiptap/extension-collaboration-cursor';
 import * as Y from 'yjs';
 import { WebsocketProvider } from 'y-websocket';
 import { createClient } from '@/lib/supabase/client';
+import { getCollaborationConfig } from '@/lib/config/collaboration';
 import EditorToolbar from './EditorToolbar';
 import EditorPresenceBar from './EditorPresenceBar';
 import type { CollaborativeEditorProps, CollaboratorPresence } from './types';
@@ -59,10 +60,20 @@ export default function CollaborativeEditor({
 
     console.log('[Editor] Initializing provider with content:', initialContent?.substring(0, 100));
 
-    // TODO: Replace with your WebSocket server URL
-    // For now, using a public Yjs server (NOT for production)
+    const config = getCollaborationConfig();
+
+    // FALLBACK MODE: Skip WebSocket, use local Yjs only
+    if (config.mode === 'fallback' || !config.websocketUrl) {
+      console.log('[Editor] Running in fallback mode (no real-time collaboration)');
+      // Create a dummy provider that's always "connected" for compatibility
+      setProvider({ synced: true, awareness: null } as any);
+      return;
+    }
+
+    console.log('[Editor] Initializing WebSocket provider:', config.websocketUrl);
+
     const wsProvider = new WebsocketProvider(
-      'wss://demos.yjs.dev',
+      config.websocketUrl,
       `lexy-contract-${contractId}`,
       ydoc,
       {
@@ -130,6 +141,12 @@ export default function CollaborativeEditor({
       }
     });
 
+    // Handle connection errors
+    wsProvider.on('connection-error', (error: any) => {
+      console.error('[Editor] WebSocket connection error:', error);
+      // Don't alert the user - fallback will handle it gracefully
+    });
+
     setProvider(wsProvider);
 
     // Cleanup
@@ -180,13 +197,18 @@ export default function CollaborativeEditor({
             Collaboration.configure({
               document: ydoc,
             }),
-            CollaborationCursor.configure({
-              provider: provider,
-              user: {
-                name: currentUser.name,
-                color: currentUser.color,
-              },
-            }),
+            // Only add CollaborationCursor if we have real awareness (not fallback mode)
+            ...(provider.awareness
+              ? [
+                  CollaborationCursor.configure({
+                    provider: provider,
+                    user: {
+                      name: currentUser.name,
+                      color: currentUser.color,
+                    },
+                  }),
+                ]
+              : []),
           ]
         : [
             StarterKit.configure({
@@ -208,7 +230,18 @@ export default function CollaborativeEditor({
   useEffect(() => {
     if (!editor || !provider) return;
 
-    // Wait for sync to complete
+    const config = getCollaborationConfig();
+
+    // FALLBACK MODE: Set content directly (no sync needed)
+    if (config.mode === 'fallback') {
+      console.log('[Editor] Fallback mode: setting initial content');
+      if (initialContent) {
+        editor.commands.setContent(initialContent);
+      }
+      return;
+    }
+
+    // WEBSOCKET MODE: Wait for sync before setting content
     const handleSync = (isSynced: boolean) => {
       if (isSynced) {
         console.log('[Editor] Editor synced, checking content');
