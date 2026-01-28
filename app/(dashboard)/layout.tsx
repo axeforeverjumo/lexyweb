@@ -10,15 +10,16 @@ export default async function ProtectedLayout({
 }) {
   const supabase = await createClient();
 
+  // Use getUser() instead of getSession() for security
+  // getUser() verifies with Supabase Auth server
   const {
-    data: { session },
-  } = await supabase.auth.getSession();
+    data: { user },
+  } = await supabase.auth.getUser();
 
-  if (!session) {
+  if (!user) {
     redirect('/login');
   }
 
-  const user = session.user;
   const userEmail = user.email || '';
   const userName = user.user_metadata?.full_name || user.email?.split('@')[0] || 'Usuario';
 

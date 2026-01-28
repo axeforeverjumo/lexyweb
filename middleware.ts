@@ -25,9 +25,12 @@ export async function middleware(req: NextRequest) {
     }
   );
 
+  // Use getUser() instead of getSession() for security
+  // getSession() reads from storage (cookies) which can be forged
+  // getUser() verifies with Supabase Auth server
   const {
-    data: { session },
-  } = await supabase.auth.getSession();
+    data: { user },
+  } = await supabase.auth.getUser();
 
   // Protected routes that require authentication
   const protectedRoutes = ['/dashboard', '/contratos', '/abogado', '/configuracion', '/perfil'];
@@ -40,15 +43,15 @@ export async function middleware(req: NextRequest) {
     req.nextUrl.pathname.startsWith(route)
   );
 
-  // Redirect to login if trying to access protected route without session
-  if (isProtectedRoute && !session) {
+  // Redirect to login if trying to access protected route without user
+  if (isProtectedRoute && !user) {
     const redirectUrl = new URL('/login', req.url);
     redirectUrl.searchParams.set('redirect', req.nextUrl.pathname);
     return NextResponse.redirect(redirectUrl);
   }
 
-  // Redirect to dashboard if trying to access auth routes with active session
-  if (isAuthRoute && session) {
+  // Redirect to dashboard if trying to access auth routes with active user
+  if (isAuthRoute && user) {
     return NextResponse.redirect(new URL('/dashboard', req.url));
   }
 
