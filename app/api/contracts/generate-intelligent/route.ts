@@ -72,7 +72,7 @@ export async function POST(request: NextRequest) {
     const analysisContext = prepareAnalysisContext(deepAnalysis);
 
     // 3. Llamar al personalizador para obtener modificaciones
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash-exp' });
+    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
     const personalizerPrompt = `${CONTRACT_PERSONALIZER_PROMPT}
 

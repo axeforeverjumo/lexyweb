@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Llamar a Gemini con el prompt de detección de intención
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash-exp' });
+    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
     const fullPrompt = `${CONTRACT_INTENT_DETECTOR_PROMPT}
 

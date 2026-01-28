@@ -53,15 +53,10 @@ export async function GET(
       );
     }
 
-    // Obtener participantes
+    // Obtener participantes (sin join anidado para evitar recursión RLS)
     const { data: participants, error: participantsError } = await supabase
       .from('conversacion_participants')
-      .select(
-        `
-        *,
-        user:profiles(id, full_name, nick, avatar_url, email)
-      `
-      )
+      .select('*')
       .eq('conversacion_id', conversacionId)
       .order('joined_at', { ascending: true });
 
@@ -73,7 +68,23 @@ export async function GET(
       );
     }
 
-    return NextResponse.json({ participants: participants || [] });
+    // Obtener datos de perfil por separado para cada participante
+    const participantsWithProfiles = await Promise.all(
+      (participants || []).map(async (participant) => {
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select('id, full_name, nick, avatar_url, email')
+          .eq('id', participant.user_id)
+          .single();
+
+        return {
+          ...participant,
+          user: profile || null,
+        };
+      })
+    );
+
+    return NextResponse.json({ participants: participantsWithProfiles });
   } catch (error) {
     console.error('Error en GET /api/conversaciones/[id]/participants:', error);
     return NextResponse.json(
