@@ -29,19 +29,14 @@ export async function GET(request: NextRequest) {
     const contrato_id = searchParams.get('contrato_id');
     const pinned_only = searchParams.get('pinned_only') === 'true';
 
-    // Query base - conversaciones propias
+    // Query base - conversaciones propias (sin participants para evitar recursión RLS)
     let query = supabase
       .from('conversaciones')
       .select(
         `
         *,
         cliente:clientes(id, nombre, apellidos),
-        contrato:contratos!conversaciones_contrato_id_fkey(id, titulo, tipo_contrato),
-        participants:conversacion_participants(
-          user_id,
-          role,
-          user:profiles(id, full_name, nick, avatar_url)
-        )
+        contrato:contratos!conversaciones_contrato_id_fkey(id, titulo, tipo_contrato)
       `
       )
       .eq('user_id', user.id)
@@ -64,7 +59,7 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Obtener conversaciones compartidas (como colaborador)
+    // Obtener conversaciones compartidas (como colaborador) - simplificado para evitar recursión RLS
     const { data: sharedParticipations, error: sharedError } = await supabase
       .from('conversacion_participants')
       .select(
@@ -72,12 +67,7 @@ export async function GET(request: NextRequest) {
         conversacion:conversaciones(
           *,
           cliente:clientes(id, nombre, apellidos),
-          contrato:contratos!conversaciones_contrato_id_fkey(id, titulo, tipo_contrato),
-          participants:conversacion_participants(
-            user_id,
-            role,
-            user:profiles(id, full_name, nick, avatar_url)
-          )
+          contrato:contratos!conversaciones_contrato_id_fkey(id, titulo, tipo_contrato)
         )
       `
       )
@@ -96,19 +86,14 @@ export async function GET(request: NextRequest) {
 
     let organizationConversaciones: any[] = [];
     if (profile?.organization_id) {
-      // Obtener chats de organización
+      // Obtener chats de organización (sin participants para evitar recursión RLS)
       const { data: orgChats } = await supabase
         .from('conversaciones')
         .select(
           `
           *,
           cliente:clientes(id, nombre, apellidos),
-          contrato:contratos!conversaciones_contrato_id_fkey(id, titulo, tipo_contrato),
-          participants:conversacion_participants(
-            user_id,
-            role,
-            user:profiles(id, full_name, nick, avatar_url)
-          )
+          contrato:contratos!conversaciones_contrato_id_fkey(id, titulo, tipo_contrato)
         `
         )
         .eq('organization_id', profile.organization_id)
