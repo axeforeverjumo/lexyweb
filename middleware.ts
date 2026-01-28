@@ -30,7 +30,7 @@ export async function middleware(req: NextRequest) {
   } = await supabase.auth.getSession();
 
   // Protected routes that require authentication
-  const protectedRoutes = ['/dashboard', '/contratos', '/configuracion', '/perfil'];
+  const protectedRoutes = ['/dashboard', '/contratos', '/abogado', '/configuracion', '/perfil'];
   const authRoutes = ['/login', '/register'];
 
   const isProtectedRoute = protectedRoutes.some((route) =>
@@ -59,6 +59,7 @@ export const config = {
   matcher: [
     '/dashboard/:path*',
     '/contratos/:path*',
+    '/abogado/:path*',
     '/configuracion/:path*',
     '/perfil/:path*',
     '/login',
