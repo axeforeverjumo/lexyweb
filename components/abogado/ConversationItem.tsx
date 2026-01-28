@@ -108,19 +108,22 @@ export default function ConversationItem({
 
           {/* Menú de acciones */}
           <DropdownMenu>
-            <DropdownMenuTrigger
-              onClick={(e) => e.stopPropagation()}
-              className="opacity-0 group-hover:opacity-100 transition-opacity ml-2"
-            >
-              <MoreVertical className="w-4 h-4 text-slate-500" />
+            <DropdownMenuTrigger asChild>
+              <button
+                onClick={(e) => e.stopPropagation()}
+                className="opacity-0 group-hover:opacity-100 transition-opacity ml-2 p-1 hover:bg-gray-100 rounded"
+                type="button"
+              >
+                <MoreVertical className="w-4 h-4 text-slate-500" />
+              </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem onClick={() => setIsEditing(true)}>
+            <DropdownMenuContent align="end" onClick={(e) => e.stopPropagation()}>
+              <DropdownMenuItem onSelect={(e) => { e.preventDefault(); setIsEditing(true); }}>
                 <Edit className="w-4 h-4 mr-2" />
                 Renombrar
               </DropdownMenuItem>
 
-              <DropdownMenuItem onClick={handleTogglePin}>
+              <DropdownMenuItem onSelect={(e) => { e.preventDefault(); handleTogglePin(e as any); }}>
                 {conversacion.is_pinned ? (
                   <>
                     <PinOff className="w-4 h-4 mr-2" />
@@ -137,7 +140,7 @@ export default function ConversationItem({
               <DropdownMenuSeparator />
 
               <DropdownMenuItem
-                onClick={handleDelete}
+                onSelect={(e) => { e.preventDefault(); handleDelete(e as any); }}
                 className="text-red-600 focus:text-red-600"
               >
                 <Trash2 className="w-4 h-4 mr-2" />
