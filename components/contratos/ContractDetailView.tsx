@@ -10,6 +10,9 @@ import {
   Globe,
   Edit,
   Trash2,
+  Share2,
+  Sparkles,
+  Users,
 } from 'lucide-react';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
@@ -17,6 +20,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import DeleteContractDialog from './DeleteContractDialog';
+import ShareContractModal from './ShareContractModal';
 
 interface Contract {
   id: string;
@@ -29,6 +33,7 @@ interface Contract {
   contenido_html: string;
   datos_completados: Record<string, any>;
   template_id?: string;
+  conversacion_id?: string | null;
 }
 
 interface ContractDetailViewProps {
@@ -70,6 +75,7 @@ const idiomaConfig = {
 export default function ContractDetailView({ contract }: ContractDetailViewProps) {
   const router = useRouter();
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+  const [showShareModal, setShowShareModal] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 
   const estadoInfo = estadoConfig[contract.estado] || {
@@ -147,8 +153,40 @@ export default function ContractDetailView({ contract }: ContractDetailViewProps
           </div>
 
           {/* Acciones */}
-          <div className="flex flex-wrap gap-2 pt-4 border-t">
+          <div className="flex flex-wrap gap-3 pt-4 border-t">
+            {/* Botón Editar con Lexy - AI Asistida */}
             <Button
+              onClick={() => router.push(`/contratos/${contract.id}/editar`)}
+              className="flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white shadow-md"
+            >
+              <Sparkles className="w-4 h-4" />
+              <span className="font-medium">Editar con Lexy</span>
+              <span className="hidden sm:inline text-xs opacity-90 ml-1">(IA + Tiempo Real)</span>
+            </Button>
+
+            {/* Botón Edición Colaborativa - Google Docs Style */}
+            <Button
+              onClick={() => router.push(`/contratos/${contract.id}/editar-colaborativo`)}
+              variant="outline"
+              className="flex items-center gap-2 border-blue-300 text-blue-700 hover:bg-blue-50 hover:border-blue-400"
+            >
+              <Users className="w-4 h-4" />
+              <span className="font-medium">Edición Colaborativa</span>
+              <span className="hidden sm:inline text-xs opacity-75 ml-1">(Solo Editor)</span>
+            </Button>
+
+            {/* Botón Compartir */}
+            <Button
+              variant="outline"
+              onClick={() => setShowShareModal(true)}
+              className="flex items-center gap-2"
+            >
+              <Share2 className="w-4 h-4" />
+              Compartir para editar
+            </Button>
+
+            <Button
+              variant="outline"
               onClick={handleDownloadPDF}
               className="flex items-center gap-2"
             >
@@ -211,6 +249,14 @@ export default function ContractDetailView({ contract }: ContractDetailViewProps
           onCancel={() => setShowDeleteDialog(false)}
         />
       )}
+
+      {/* Modal de compartir contrato */}
+      <ShareContractModal
+        contractId={contract.id}
+        conversacionId={contract.conversacion_id || null}
+        isOpen={showShareModal}
+        onClose={() => setShowShareModal(false)}
+      />
     </div>
   );
 }

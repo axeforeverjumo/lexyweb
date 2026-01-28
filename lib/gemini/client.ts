@@ -25,7 +25,7 @@ function getGenAI(): GoogleGenerativeAI {
 class GeminiClient {
   private modelName: string;
 
-  constructor(modelName: string = 'gemini-1.5-flash') {
+  constructor(modelName: string = 'gemini-1.5-flash-latest') {
     this.modelName = modelName;
   }
 
