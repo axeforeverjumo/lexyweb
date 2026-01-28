@@ -22,7 +22,7 @@ const withPWA = require('next-pwa')({
 const nextConfig = {
   reactStrictMode: true,
   // Enable standalone output for Docker deployment
-  output: 'standalone',
+  // DISABLED for Vercel: output: 'standalone',
   eslint: {
     // Deshabilitar ESLint durante build para evitar cuelgues
     ignoreDuringBuilds: true,
@@ -47,6 +47,11 @@ const nextConfig = {
     serverActions: {
       bodySizeLimit: '10mb',
     },
+  },
+  // Asegurar que las variables NEXT_PUBLIC_ están disponibles
+  env: {
+    NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
+    NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
   },
 };
 

@@ -11,7 +11,10 @@
     "confirm-emails": "node confirm-emails.js",
     "test-supabase": "node test-supabase.js",
     "verify-env": "node scripts/verify-env.js",
+    "verify-production": "node scripts/verify-production.js",
+    "check-vercel-env": "bash scripts/check-vercel-env.sh",
     "redeploy": "bash scripts/redeploy.sh",
+    "fix-vercel": "bash scripts/fix-vercel-supabase.sh",
     "check-production": "node scripts/check-production.js"
   },
   "dependencies": {

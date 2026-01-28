@@ -1,72 +1,134 @@
 #!/bin/bash
 
-# Script de Redeploy para Solucionar Error 401 en Login
+###############################################################################
+# Script de Redeploy Forzado para Vercel
+#
+# Este script fuerza un redeploy limpio SIN cache para asegurar que las
+# variables de entorno se embeben correctamente en el bundle.
+###############################################################################
 
-echo "╔═══════════════════════════════════════════════════════════════╗"
-echo "║        REDEPLOY COMPLETO PARA SOLUCIONAR ERROR 401           ║"
-echo "╚═══════════════════════════════════════════════════════════════╝"
+set -e
+
+# Colores para output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+NC='\033[0m'
+
+echo ""
+echo -e "${BLUE}╔════════════════════════════════════════════════════════════════╗${NC}"
+echo -e "${BLUE}║  REDEPLOY FORZADO SIN CACHE - Vercel + Supabase              ║${NC}"
+echo -e "${BLUE}╚════════════════════════════════════════════════════════════════╝${NC}"
 echo ""
 
-# Directorio del proyecto
-PROJECT_DIR="/Users/juanmanuelojedagarcia/Documents/develop/Desarrollos internos/lexyweb"
-cd "$PROJECT_DIR" || exit 1
-
-echo "📁 Directorio: $PROJECT_DIR"
-echo ""
-
-# PASO 1: Limpiar build anterior
-echo "🧹 PASO 1/4: Limpiando build anterior..."
-rm -rf .next
-rm -rf out
-echo "   ✅ Build anterior eliminado"
-echo ""
-
-# PASO 2: Rebuild local para verificar
-echo "🔨 PASO 2/4: Rebuilding localmente..."
-echo "   (Esto puede tomar 1-2 minutos)"
-if npm run build; then
-    echo "   ✅ Build local exitoso"
-else
-    echo "   ❌ Error en build local"
-    echo "   Revisa los errores arriba antes de continuar"
+# Verificar que estamos en el directorio correcto
+if [ ! -f "package.json" ]; then
+    echo -e "${RED}❌ ERROR: No se encuentra package.json${NC}"
+    echo "   Ejecuta este script desde la raíz del proyecto."
     exit 1
 fi
+
+# Verificar que vercel CLI está instalado
+if ! command -v vercel &> /dev/null; then
+    echo -e "${YELLOW}⚠️  Vercel CLI no está instalado.${NC}"
+    echo "   Instalando globalmente..."
+    npm install -g vercel
+fi
+
+echo -e "${YELLOW}📋 PASO 1: Verificando estado actual${NC}"
 echo ""
 
-# PASO 3: Deploy a producción
-echo "🚀 PASO 3/4: Deploying a producción..."
-echo "   (Esto puede tomar 2-3 minutos)"
+# Verificar git status
+if [ -n "$(git status --porcelain)" ]; then
+    echo -e "${YELLOW}⚠️  Hay cambios sin commitear:${NC}"
+    git status --short
+    echo ""
+    read -p "¿Quieres hacer commit de estos cambios antes de continuar? (s/n): " -n 1 -r
+    echo ""
+    if [[ $REPLY =~ ^[SsYy]$ ]]; then
+        echo -e "${BLUE}📝 Creando commit...${NC}"
+        git add .
+        git commit -m "fix: configuración de variables de entorno para Vercel"
+        git push origin main
+    fi
+fi
 
-if vercel --prod --yes; then
-    echo "   ✅ Deploy exitoso"
-else
-    echo "   ❌ Error en deploy"
-    echo "   Revisa los errores arriba"
+echo ""
+echo -e "${GREEN}✅ Estado verificado${NC}"
+echo ""
+
+echo -e "${YELLOW}📋 PASO 2: Configurando variables en Vercel${NC}"
+echo ""
+echo "Por favor, verifica que estas variables estén configuradas en Vercel:"
+echo ""
+echo -e "${BLUE}1. NEXT_PUBLIC_SUPABASE_URL${NC}"
+echo "   https://supabase.odoo.barcelona"
+echo ""
+echo -e "${BLUE}2. NEXT_PUBLIC_SUPABASE_ANON_KEY${NC}"
+echo "   eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzdXBhYmFzZSIsImlhdCI6MTc2NjcxMzY4MCwiZXhwIjo0OTIyMzg3MjgwLCJyb2xlIjoiYW5vbiJ9.xMSCK41FQ6t1N5x-r3TXm30tRIURDAqN16tj8pW3tZA"
+echo ""
+echo -e "${BLUE}3. SUPABASE_SERVICE_ROLE_KEY${NC}"
+echo "   eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzdXBhYmFzZSIsImlhdCI6MTc2NjcxMzY4MCwiZXhwIjo0OTIyMzg3MjgwLCJyb2xlIjoic2VydmljZV9yb2xlIn0.Vw7Aopd8gGRIoQA6vMZeFKq1Xyt0JdI6645EijHR2Pc"
+echo ""
+echo -e "${YELLOW}IMPORTANTE:${NC} Estas variables deben estar en:"
+echo "  - Environment: Production"
+echo "  - Exposed to: Production AND Preview"
+echo ""
+read -p "¿Están configuradas correctamente en Vercel Dashboard? (s/n): " -n 1 -r
+echo ""
+if [[ ! $REPLY =~ ^[SsYy]$ ]]; then
+    echo ""
+    echo -e "${RED}❌ Abortando${NC}"
+    echo ""
+    echo "Ve a: https://vercel.com/tu-proyecto/settings/environment-variables"
+    echo "Y configura las variables antes de continuar."
     exit 1
 fi
+
+echo ""
+echo -e "${GREEN}✅ Variables confirmadas${NC}"
 echo ""
 
-# PASO 4: Instrucciones finales
-echo "✅ PASO 4/4: Deploy completado"
+echo -e "${YELLOW}📋 PASO 3: Limpiando builds locales${NC}"
 echo ""
-echo "╔═══════════════════════════════════════════════════════════════╗"
-echo "║                    PRÓXIMOS PASOS                             ║"
-echo "╚═══════════════════════════════════════════════════════════════╝"
+rm -rf .next out node_modules/.cache
+echo -e "${GREEN}✅ Cache limpiado${NC}"
 echo ""
-echo "1. Espera 30 segundos a que Vercel propague los cambios"
+
+echo -e "${YELLOW}📋 PASO 4: Forzando redeploy SIN cache${NC}"
 echo ""
-echo "2. Abre: https://www.lexy.plus/login"
+echo "Este proceso puede tardar varios minutos..."
 echo ""
-echo "3. Prueba con estas credenciales:"
-echo "   Email: test@lexy.plus"
-echo "   Password: Test123456!"
+
+# Redeploy usando vercel CLI con --force
+echo -e "${BLUE}Iniciando redeploy con --force...${NC}"
+vercel --prod --force
+
 echo ""
-echo "4. Abre la consola del navegador (F12) y verifica:"
-echo "   - Si funciona: ¡problema resuelto! 🎉"
-echo "   - Si sigue 401: ejecuta el diagnóstico avanzado"
-echo "   - Si es 400: verifica usuario/password"
+echo -e "${GREEN}✅ Redeploy iniciado${NC}"
 echo ""
-echo "5. Para diagnóstico avanzado:"
-echo "   vercel logs --follow"
+
+echo -e "${YELLOW}📋 PASO 5: Esperando a que termine el build...${NC}"
 echo ""
-echo "═══════════════════════════════════════════════════════════════"
+echo "Ve a: https://vercel.com/dashboard"
+echo "Espera a que el deployment esté en estado 'Ready' (Ready icon verde)"
+echo ""
+read -p "Presiona Enter cuando el deployment esté listo..." -r
+echo ""
+
+echo -e "${YELLOW}📋 PASO 6: Verificando producción${NC}"
+echo ""
+node scripts/verify-production.js
+
+echo ""
+echo -e "${GREEN}╔════════════════════════════════════════════════════════════════╗${NC}"
+echo -e "${GREEN}║  ✅ PROCESO COMPLETADO                                         ║${NC}"
+echo -e "${GREEN}╚════════════════════════════════════════════════════════════════╝${NC}"
+echo ""
+echo "Ahora prueba hacer login en: https://www.lexy.plus/login"
+echo ""
+echo "Credenciales de prueba:"
+echo "  Email: j.ojedagarcia@icloud.com"
+echo "  Password: 19861628"
+echo ""
