@@ -26,6 +26,7 @@ const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
   { name: 'Contratos', href: '/contratos', icon: FileText },
   { name: 'Abogado IA', href: '/abogado', icon: Scale },
+  { name: 'Mi Perfil', href: '/perfil', icon: User },
 ];
 
 export default function DashboardLayout({ children, user }: DashboardLayoutProps) {
