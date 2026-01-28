@@ -57,6 +57,8 @@ export default function CollaborativeEditor({
   useEffect(() => {
     if (!currentUser) return;
 
+    console.log('[Editor] Initializing provider with content:', initialContent?.substring(0, 100));
+
     // TODO: Replace with your WebSocket server URL
     // For now, using a public Yjs server (NOT for production)
     const wsProvider = new WebsocketProvider(
@@ -71,9 +73,14 @@ export default function CollaborativeEditor({
       }
     );
 
+    // Store initial content population flag
+    let hasPopulated = false;
+
     // Check connected users count before allowing connection
     wsProvider.on('sync', (isSynced: boolean) => {
-      if (isSynced) {
+      if (isSynced && !hasPopulated) {
+        console.log('[Editor] Yjs synced');
+
         const awareness = wsProvider.awareness;
         const connectedCount = awareness.getStates().size;
 
@@ -114,6 +121,8 @@ export default function CollaborativeEditor({
         awareness.on('change', updateCollaborators);
         updateCollaborators(); // Initial update
 
+        hasPopulated = true;
+
         // Cleanup awareness listener
         return () => {
           awareness.off('change', updateCollaborators);
@@ -127,7 +136,7 @@ export default function CollaborativeEditor({
     return () => {
       wsProvider.destroy();
     };
-  }, [contractId, ydoc, currentUser, maxCollaborators]);
+  }, [contractId, ydoc, currentUser, maxCollaborators, initialContent]);
 
   // Update last_seen_at heartbeat in database
   useEffect(() => {
@@ -160,33 +169,81 @@ export default function CollaborativeEditor({
     };
   }, [contractId, currentUser, provider]);
 
-  // Initialize Tiptap editor
-  const editor = useEditor({
-    extensions: [
-      StarterKit.configure({
-        history: false, // Important: disable history when using Yjs
-      }),
-      Collaboration.configure({
-        document: ydoc,
-      }),
-      CollaborationCursor.configure({
-        provider: provider || undefined,
-        user: currentUser
-          ? {
-              name: currentUser.name,
-              color: currentUser.color,
-            }
-          : undefined,
-      }),
-    ],
-    content: initialContent,
-    editable: !readOnly,
-    immediatelyRender: false, // Fix SSR hydration mismatch
-    onUpdate: ({ editor }) => {
-      const content = editor.getHTML();
-      onContentChange?.(content);
+  // Initialize Tiptap editor (only after provider and user are ready)
+  const editor = useEditor(
+    {
+      extensions: provider && currentUser
+        ? [
+            StarterKit.configure({
+              history: false, // Important: disable history when using Yjs
+            }),
+            Collaboration.configure({
+              document: ydoc,
+            }),
+            CollaborationCursor.configure({
+              provider: provider,
+              user: {
+                name: currentUser.name,
+                color: currentUser.color,
+              },
+            }),
+          ]
+        : [
+            StarterKit.configure({
+              history: false,
+            }),
+          ],
+      // DO NOT set content when using Collaboration - Yjs manages content
+      editable: !readOnly,
+      immediatelyRender: false, // Fix SSR hydration mismatch
+      onUpdate: ({ editor }) => {
+        const content = editor.getHTML();
+        onContentChange?.(content);
+      },
     },
-  });
+    [provider, currentUser, ydoc]
+  ); // Re-initialize when provider or user changes
+
+  // Populate Yjs document with initial content ONLY if empty
+  useEffect(() => {
+    if (!editor || !provider) return;
+
+    // Wait for sync to complete
+    const handleSync = (isSynced: boolean) => {
+      if (isSynced) {
+        console.log('[Editor] Editor synced, checking content');
+
+        // Get the Yjs XmlFragment that Tiptap uses
+        const yXmlFragment = ydoc.getXmlFragment('default');
+
+        console.log('[Editor] Yjs doc children count:', yXmlFragment.length);
+
+        // Only populate if the document is empty
+        if (yXmlFragment.length === 0 && initialContent) {
+          console.log('[Editor] Populating empty Yjs doc with initial content');
+
+          // Set content through the editor (which will update Yjs)
+          editor.commands.setContent(initialContent);
+        } else {
+          console.log('[Editor] Using existing synced content');
+        }
+
+        // Remove listener after first sync
+        provider.off('sync', handleSync);
+      }
+    };
+
+    provider.on('sync', handleSync);
+
+    // If already synced, run immediately
+    if (provider.synced) {
+      handleSync(true);
+    }
+
+    return () => {
+      provider.off('sync', handleSync);
+    };
+  }, [editor, provider, ydoc, initialContent]);
 
   // Auto-save functionality
   useEffect(() => {
@@ -232,10 +289,14 @@ export default function CollaborativeEditor({
     }
   }, [editor, onSave]);
 
-  if (!editor || !currentUser) {
+  // Show loading state until editor, user, and provider are ready
+  if (!editor || !currentUser || !provider) {
     return (
       <div className="flex items-center justify-center h-full">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+        <div className="flex flex-col items-center gap-3">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+          <p className="text-sm text-gray-500">Conectando al editor colaborativo...</p>
+        </div>
       </div>
     );
   }
