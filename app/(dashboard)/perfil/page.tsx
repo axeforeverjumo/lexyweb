@@ -180,7 +180,7 @@ export default function PerfilPage() {
                       : 'bg-gray-100 text-gray-700'
                   }`}
                 >
-                  {profile.subscription_status.toUpperCase()}
+                  {(profile.subscription_status || 'inactive').toUpperCase()}
                 </span>
               </div>
             </div>
@@ -241,7 +241,7 @@ export default function PerfilPage() {
                 <div>
                   <p className="font-semibold text-gray-900">{organization.name}</p>
                   <p className="text-sm text-gray-600">
-                    {organization.subscription_tier.toUpperCase()} Plan
+                    {(organization.subscription_tier || 'free').toUpperCase()} Plan
                   </p>
                 </div>
                 {profile.is_organization_owner && (
